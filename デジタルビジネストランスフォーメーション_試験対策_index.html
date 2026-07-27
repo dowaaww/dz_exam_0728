@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>デジタルビジネストランスフォーメーション 試験対策教科書</title>
+<style>
+  :root{
+    --main:#7a4fb5; --main-d:#5c3690; --accent:#b98fe0; --bg:#f7f5fa;
+    --ink:#2c2a33; --sub:#6b6577; --line:#e5dff0; --ok:#2e9e6b; --ng:#d9534f;
+    --card:#ffffff; --warn:#e0a800;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;font-family:"Hiragino Kaku Gothic ProN","Yu Gothic","Meiryo",sans-serif;
+    color:var(--ink);background:var(--bg);line-height:1.75;font-size:16px;}
+  header.top{background:linear-gradient(120deg,var(--main-d),var(--main));color:#fff;
+    padding:26px 20px 20px;text-align:center;}
+  header.top h1{margin:0;font-size:1.5rem;letter-spacing:.02em;}
+  header.top p{margin:6px 0 0;opacity:.9;font-size:.85rem;}
+  nav.tabs{position:sticky;top:0;z-index:50;background:#fff;display:flex;
+    justify-content:center;gap:4px;border-bottom:2px solid var(--line);
+    box-shadow:0 2px 8px rgba(0,0,0,.05);flex-wrap:wrap;padding:6px 4px;}
+  nav.tabs button{border:none;background:transparent;font-size:1rem;font-weight:700;
+    color:var(--sub);padding:12px 22px;cursor:pointer;border-radius:8px;transition:.15s;}
+  nav.tabs button:hover{background:var(--bg);color:var(--main);}
+  nav.tabs button.active{background:var(--main);color:#fff;}
+  main{max-width:920px;margin:0 auto;padding:24px 18px 80px;}
+  .view{display:none;}
+  .view.active{display:block;animation:fade .3s;}
+  @keyframes fade{from{opacity:0;transform:translateY(6px);}to{opacity:1;transform:none;}}
+
+  /* 目次 */
+  .toc{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:22px 26px;margin-bottom:34px;box-shadow:0 3px 12px rgba(90,54,144,.06);}
+  .toc h2{margin:0 0 6px;color:var(--main-d);font-size:1.25rem;}
+  .toc .lead{color:var(--sub);font-size:.85rem;margin:0 0 14px;}
+  .toc ol{margin:0;padding-left:0;counter-reset:u;list-style:none;}
+  .toc ol li{counter-increment:u;margin:2px 0;}
+  .toc ol li a{display:flex;justify-content:space-between;align-items:baseline;
+    text-decoration:none;color:var(--ink);padding:9px 12px;border-radius:8px;transition:.12s;gap:12px;}
+  .toc ol li a:hover{background:var(--bg);color:var(--main-d);}
+  .toc ol li a .t::before{content:counter(u) ". ";color:var(--main);font-weight:700;}
+  .toc ol li a .t{font-weight:600;}
+  .toc ol li a .pg{color:var(--accent);font-size:.8rem;white-space:nowrap;font-weight:700;}
+  .toc .sub{font-size:.8rem;color:var(--sub);padding:2px 12px 2px 30px;}
+
+  /* 教科書本文 */
+  section.unit{margin-bottom:40px;scroll-margin-top:70px;}
+  section.unit>h2{color:#fff;background:linear-gradient(100deg,var(--main),var(--accent));
+    padding:12px 20px;border-radius:10px;font-size:1.28rem;margin:0 0 18px;
+    box-shadow:0 3px 10px rgba(122,79,181,.2);}
+  section.unit h3{color:var(--main-d);border-left:6px solid var(--main);
+    padding-left:12px;margin:26px 0 10px;font-size:1.1rem;}
+  section.unit h4{color:var(--main-d);margin:18px 0 6px;font-size:1rem;}
+  section.unit p{margin:8px 0;}
+  .term{background:#f0e9fa;color:var(--main-d);font-weight:700;padding:1px 5px;border-radius:4px;}
+  .box{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--accent);
+    border-radius:10px;padding:14px 18px;margin:14px 0;box-shadow:0 2px 6px rgba(0,0,0,.03);}
+  .box.key{border-left-color:var(--warn);background:#fffdf5;}
+  .box.key b{color:var(--warn);}
+  .box h4{margin-top:0;}
+  table.tb{width:100%;border-collapse:collapse;margin:14px 0;font-size:.9rem;background:#fff;
+    border-radius:8px;overflow:hidden;box-shadow:0 2px 6px rgba(0,0,0,.04);}
+  table.tb th{background:var(--main);color:#fff;padding:9px 10px;text-align:left;font-weight:700;}
+  table.tb td{border-bottom:1px solid var(--line);padding:9px 10px;vertical-align:top;}
+  table.tb tr:nth-child(even) td{background:#faf8fd;}
+  ul.clean{margin:8px 0;padding-left:22px;}
+  ul.clean li{margin:5px 0;}
+  .backtop{display:inline-block;margin-top:12px;font-size:.8rem;color:var(--main);
+    text-decoration:none;border:1px solid var(--line);padding:4px 12px;border-radius:20px;}
+  .backtop:hover{background:var(--main);color:#fff;}
+
+  /* 問題一覧 */
+  .q-intro{background:var(--card);border:1px solid var(--line);border-radius:12px;
+    padding:18px 22px;margin-bottom:20px;}
+  .q-intro h2{margin:0 0 6px;color:var(--main-d);}
+  .filterbar{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0;}
+  .filterbar button{border:1px solid var(--line);background:#fff;color:var(--sub);
+    padding:6px 12px;border-radius:20px;cursor:pointer;font-size:.82rem;transition:.12s;}
+  .filterbar button.active{background:var(--main);color:#fff;border-color:var(--main);}
+  .qitem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;
+    margin:12px 0;box-shadow:0 2px 6px rgba(0,0,0,.03);}
+  .qitem .qhead{display:flex;gap:10px;align-items:baseline;margin-bottom:6px;}
+  .qnum{background:var(--main);color:#fff;font-size:.72rem;font-weight:700;padding:2px 9px;
+    border-radius:20px;white-space:nowrap;}
+  .qtag{font-size:.7rem;color:var(--main-d);background:#f0e9fa;padding:2px 8px;border-radius:20px;}
+  .qtag.desc{background:#fff3e0;color:#b9770e;}
+  .qtext{font-weight:600;margin:2px 0 10px;}
+  .qopts{list-style:none;margin:0;padding:0;}
+  .qopts li{padding:6px 12px;margin:4px 0;border:1px solid var(--line);border-radius:8px;font-size:.92rem;}
+  .qopts li.correct{background:#eafaf1;border-color:var(--ok);font-weight:700;}
+  .ans{margin-top:10px;padding:10px 14px;background:#f7f5fa;border-radius:8px;font-size:.9rem;}
+  .ans b{color:var(--ok);}
+  .model{margin-top:8px;padding:10px 14px;background:#fff8ee;border-radius:8px;font-size:.9rem;border:1px dashed #e5c98a;}
+  .model b{color:#b9770e;}
+
+  /* 演習 */
+  .ex-panel{background:var(--card);border:1px solid var(--line);border-radius:14px;
+    padding:26px;text-align:center;box-shadow:0 3px 12px rgba(90,54,144,.06);}
+  .ex-panel h2{color:var(--main-d);margin:0 0 8px;}
+  .ex-panel p{color:var(--sub);}
+  .btn{background:var(--main);color:#fff;border:none;padding:12px 30px;border-radius:30px;
+    font-size:1.02rem;font-weight:700;cursor:pointer;transition:.15s;box-shadow:0 3px 10px rgba(122,79,181,.25);}
+  .btn:hover{background:var(--main-d);transform:translateY(-1px);}
+  .btn.sec{background:#fff;color:var(--main);border:2px solid var(--main);box-shadow:none;}
+  .btn.sec:hover{background:var(--main);color:#fff;}
+  .progress{font-size:.85rem;color:var(--sub);margin-bottom:8px;font-weight:700;}
+  .pbar{height:8px;background:var(--line);border-radius:8px;overflow:hidden;margin-bottom:20px;}
+  .pbar>div{height:100%;background:linear-gradient(90deg,var(--main),var(--accent));width:0;transition:.3s;}
+  .exq{background:#fff;border:1px solid var(--line);border-radius:12px;padding:20px 22px;box-shadow:0 2px 8px rgba(0,0,0,.04);}
+  .exq .qtext{font-size:1.05rem;}
+  .exopts{list-style:none;margin:14px 0;padding:0;}
+  .exopts li{padding:12px 16px;margin:8px 0;border:2px solid var(--line);border-radius:10px;
+    cursor:pointer;transition:.12s;}
+  .exopts li:hover{border-color:var(--accent);background:#faf8fd;}
+  .exopts li.sel{border-color:var(--main);background:#f0e9fa;font-weight:700;}
+  textarea.exwrite{width:100%;min-height:110px;border:2px solid var(--line);border-radius:10px;
+    padding:12px;font-size:.95rem;font-family:inherit;resize:vertical;}
+  .exnav{display:flex;justify-content:space-between;margin-top:20px;gap:10px;}
+  /* 採点結果 */
+  .result-head{text-align:center;background:linear-gradient(120deg,var(--main-d),var(--main));
+    color:#fff;padding:26px;border-radius:14px;margin-bottom:8px;}
+  .result-head .score{font-size:2.6rem;font-weight:800;margin:6px 0;}
+  .ritem{background:#fff;border:1px solid var(--line);border-radius:10px;padding:16px 18px;margin:12px 0;border-left:6px solid var(--line);}
+  .ritem.ok{border-left-color:var(--ok);}
+  .ritem.ng{border-left-color:var(--ng);}
+  .ritem.skip{border-left-color:var(--warn);}
+  .badge{font-size:.72rem;font-weight:700;padding:2px 10px;border-radius:20px;color:#fff;}
+  .badge.ok{background:var(--ok);}
+  .badge.ng{background:var(--ng);}
+  .badge.skip{background:var(--warn);}
+  .rmeta{font-size:.85rem;margin:8px 0;}
+  .rmeta .you{color:var(--ng);} .rmeta .cor{color:var(--ok);}
+  .hidden{display:none;}
+  @media(max-width:600px){
+    nav.tabs button{padding:10px 12px;font-size:.9rem;}
+    main{padding:16px 12px 60px;}
+    section.unit>h2{font-size:1.1rem;}
+  }
+</style>
+</head>
+<body>
+<header class="top">
+  <h1>デジタルビジネストランスフォーメーション</h1>
+  <p>試験対策 総合教科書 ＋ 問題演習システム（全14回まとめ）</p>
+</header>
+<nav class="tabs">
+  <button class="tab-btn active" data-view="textbook">📖 教科書</button>
+  <button class="tab-btn" data-view="qlist">📋 問題一覧（全150問）</button>
+  <button class="tab-btn" data-view="exercise">✏️ 問題演習</button>
+</nav>
+
+<main>
+<!-- ================= 教科書 ================= -->
+<div id="textbook" class="view active">
+  <div class="toc" id="top">
+    <h2>目次</h2>
+    <p class="lead">各単元名をクリックすると、その単元へジャンプします。試験に出やすい重要語は<span class="term">紫のマーカー</span>、特に重要なポイントは黄色の囲みで示しています。</p>
+    <ol>
+      <li><a href="#u1"><span class="t">DXの基礎概念</span><span class="pg">P.1</span></a></li>
+      <li><a href="#u2"><span class="t">マーケティングDXの全体像</span><span class="pg">P.2</span></a></li>
+      <li><a href="#u3"><span class="t">DXに活用できる最新技術（12分類）</span><span class="pg">P.3</span></a></li>
+      <li><a href="#u4"><span class="t">DXを阻む要因と日本の課題</span><span class="pg">P.4</span></a></li>
+      <li><a href="#u5"><span class="t">認知領域のマーケティングDX</span><span class="pg">P.5</span></a></li>
+      <li><a href="#u6"><span class="t">体験領域のマーケティングDX</span><span class="pg">P.6</span></a></li>
+      <li><a href="#u7"><span class="t">継続領域のマーケティングDXとフレームワーク</span><span class="pg">P.7</span></a></li>
+      <li><a href="#u8"><span class="t">戦略領域のマーケティングDXと生成AI活用</span><span class="pg">P.8</span></a></li>
+      <li><a href="#u9"><span class="t">基幹業務DX（管理部門）</span><span class="pg">P.9</span></a></li>
+      <li><a href="#u10"><span class="t">サプライチェーンDX</span><span class="pg">P.10</span></a></li>
+      <li><a href="#u11"><span class="t">DX事例研究・関連用語のまとめ</span><span class="pg">P.11</span></a></li>
+    </ol>
+  </div>
+
+  <!-- UNIT 1 -->
+  <section class="unit" id="u1">
+    <h2>第1単元　DXの基礎概念</h2>
+
+    <h3>1-1. DX（デジタルトランスフォーメーション）とは</h3>
+    <p><span class="term">DX（Digital Transformation）</span>とは、<b>データを活用したビジネスや社会の「変革」</b>を指す。単なるペーパーレス化・リモート会議・業務の自動化はDXではない。これらは「データの活用が想定されていない」ため不十分で、あくまで<b>データを活用した変革</b>こそがDXの本質である。</p>
+    <div class="box">
+      <h4>「D」と「X」の意味</h4>
+      <ul class="clean">
+        <li><b>D（デジタル）</b>＝データを活用すること。ペーパーレスや自動化そのものではない。</li>
+        <li><b>X（トランスフォーメーション＝変革）</b>＝英語圏では変革（transformation）を「X」と表記する。例：<span class="term">GX</span>（Green Transformation）、<span class="term">BX</span>（Business Transformation）、<span class="term">CX</span>（Customer Experience＝顧客体験）など。</li>
+      </ul>
+    </div>
+
+    <h3>1-2. 創造的破壊（Creative Destruction）</h3>
+    <p><span class="term">創造的破壊（Creative Destruction）</span>とは、<b>イノベーション（技術革新）によって古い産業やビジネスモデルが破壊され、同時に新しい価値が創造される経済の進化プロセス</b>のこと。経済学者<span class="term">シュンペーター</span>が提唱した。</p>
+    <div class="box key">
+      <p><b>試験頻出：</b>「創造的破壊」＝シュンペーター、という対応を必ず覚える。</p>
+    </div>
+
+    <h3>1-3. DXで「失われたもの」と「新しくできたもの」</h3>
+    <p>DXは各産業に「破壊」をもたらした。代表的な4事例：</p>
+    <table class="tb">
+      <tr><th>失われたもの</th><th>新しくできたもの</th><th>影響を受けた産業</th></tr>
+      <tr><td>百科事典・教科書</td><td>Google・ChatGPT</td><td>教育産業の破壊</td></tr>
+      <tr><td>音楽CD・映画DVD</td><td>サブスク配信サービス</td><td>コンテンツ産業の破壊</td></tr>
+      <tr><td>テレビ・新聞</td><td>映像配信サービス（YouTube・Netflix）</td><td>メディア産業の破壊</td></tr>
+      <tr><td>マス広告</td><td>インターネット広告</td><td>広告産業の破壊</td></tr>
+    </table>
+    <p>DXの影響は<b>「ユーザー目線」と「事業者目線」</b>それぞれで「失われたこと／良くなったこと」の4視点に分解して考えることが重要。例：サブスク配信で、ユーザーは「アナログの音源・質感」を失い「多くの音楽・デバイスフリー・未知の音楽との出会い・コスパ」を得た。事業者は「店舗型ビジネス」を失い「新規参入障壁の低下・収益基盤の安定性」を得た。</p>
+
+    <h3>1-4. 従来の改革とDXによる変革の違い</h3>
+    <table class="tb">
+      <tr><th>従来の改革</th><th>DXによる変革</th></tr>
+      <tr><td>提供価値は変わらない（連続的な改善）</td><td>新しい提供価値（非連続な変革）</td></tr>
+      <tr><td>例：百科事典を薄くする</td><td>例：ChatGPTで調べ方そのものを変える</td></tr>
+    </table>
+    <p>すなわちDXとは<b>「データを活用してイノベーションを起こし、新しい提供価値をつくること」</b>である。</p>
+
+    <h3>1-5. 日本のDXの現状</h3>
+    <p>スイスの<span class="term">国際経営開発研究所（IMD）</span>が発表する<span class="term">世界デジタル競争力ランキング</span>では、<b>日本は2025年に67か国中30位</b>（2024年のスコアは68.1点）。インフラは整っているが総合順位は低い。</p>
+
+    <h3>1-6. DXの領域（企業・行政・社会）</h3>
+    <p>世界で最初にDXを提唱した<span class="term">エリック・ストルターマン教授</span>のDXの領域規定（2022年）では、DXを<b>「企業」「行政」「社会」</b>に細分化する。</p>
+    <ul class="clean">
+      <li><b>企業のDX</b>：仕掛け人が存在する。</li>
+      <li><b>社会のDX</b>：企業DXのような仕掛け人は不在で、社会環境全体が変化すること。</li>
+    </ul>
+    <p>DXの領域は非常に広く、働き方のDX・防災のDX・教育のDX・産業のDX・業務のDXなどが組み合わさっている。本授業では特に<b>企業のDX</b>にフォーカスする。企業のDXは組織構造から、<span class="term">マーケティングDX</span>（営業・マーケティング部門）、<span class="term">サプライチェーンDX</span>（研究開発・製造・品質管理部門）、<span class="term">基幹業務DX</span>（管理部門）の3つに整理される。</p>
+    <div class="box">
+      <h4>本授業の3つの方針</h4>
+      <ul class="clean">
+        <li><b>実用性</b>：実社会に即し、実務としても活用できる内容</li>
+        <li><b>先進性</b>：目まぐるしく変わる最先端の内容</li>
+        <li><b>関連性</b>：ビジネス経験のない学生になじみやすい事例</li>
+      </ul>
+    </div>
+    <p><span class="term">ERP（Enterprise Resource Planning）</span>の導入は業務効率化の代表例として挙げられる。</p>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 2 -->
+  <section class="unit" id="u2">
+    <h2>第2単元　マーケティングDXの全体像</h2>
+
+    <h3>2-1. データは21世紀最大の資源</h3>
+    <p>英経済誌<span class="term">The Economist</span>は「The world's most valuable resource（世界で最も貴重な資源）はもはや石油ではない」と表現した。すなわち<b>データは21世紀最大の資源</b>である。世界のデータの90%は直近2年以内に生成されたもの、現在の仕事の約30%は2030年までに自動化されるとも言われる。</p>
+
+    <h3>2-2. マーケティングDXを生んだ「3つの環境変化」</h3>
+    <div class="box key">
+      <p><b>試験頻出（3つセットで暗記）：</b></p>
+      <ul class="clean">
+        <li><b>❶顧客接点のデジタル化</b>：Uber Eats、Instagram、PayPayなど、日常行動の多くがデジタル化。可処分時間に占めるデジタル活動の割合が増加。</li>
+        <li><b>❷生成AIによる言語の情報爆発</b>：ChatGPTなどで、これまで人間が数時間かけた作業が数秒で終わる。</li>
+        <li><b>❸データの重要性の高まり</b>：行動ログ・GPS位置情報・IoT機器データが蓄積し、データを新しい資産として活用することが重要に。</li>
+      </ul>
+    </div>
+
+    <h3>2-3. マーケティングDXとは</h3>
+    <p><span class="term">マーケティングDX</span>とは、<b>生活者の「日常」の変化に企業が対応すること</b>。“顧客と企業の接点”の変革であり、最もわかりやすく目に見える変化である。対応の方向は、①アプリ化などで企業のデジタル動線を整備、②生成AIでサービスを自動化・効率化、③データを活用して顧客理解の精度を高める、の3つ。</p>
+    <div class="box">
+      <p><b>重要な考え方：</b>「生活者の視点で考えること」が最も大事。<b>手段が目的化してはいけない</b>。本当に意味のある取り組みか真剣に考える。</p>
+    </div>
+
+    <h3>2-4. 顧客と企業の接点：認知・体験・継続</h3>
+    <p>マーケティングDXは領域が広く漠然としているため、<b>「顧客との接点」を因数分解する</b>ところから始める。基本の3フェーズは：</p>
+    <table class="tb">
+      <tr><th>認知</th><th>体験</th><th>継続</th></tr>
+      <tr><td>“はじめまして”</td><td>“使ってみる”</td><td>“使い続ける”</td></tr>
+    </table>
+
+    <h3>2-5. カスタマージャーニー</h3>
+    <p><span class="term">カスタマージャーニー</span>とは、顧客が商品・サービスを認知し、検討・購入・利用・再購入に至るまでの<b>一連の行動や思考のプロセスを時系列で可視化したもの</b>。正解はなく、書き方にはさまざまなパターンがある。これにより「ターゲット目線」と「網羅性」を担保し、限られた資源をどこに重点配分すべきかを決める。</p>
+
+    <h3>2-6. AI時代のカスタマージャーニーとマーケターの変化</h3>
+    <p>顧客接点は「人間×企業」から<b>「人間×AIエージェント×企業のAI」の三者構造</b>へと変化。ジャーニーは<b>人間の動線とAIの動線の2レイヤー</b>で描く時代になる。マーケターの役割も<b>「作業する人」から「AIを指揮する人」</b>へ変化し、人間には「問いを立てる力」「違和感を見つける力」「顧客に共感する力」が残る。</p>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 3 -->
+  <section class="unit" id="u3">
+    <h2>第3単元　DXに活用できる最新技術（12分類）</h2>
+    <p>DXに活用できる技術は、<b>インフラ技術・アプリケーション技術・エクスペリエンス技術</b>の3カテゴリ・12種類に整理される。</p>
+    <table class="tb">
+      <tr><th>インフラ技術</th><th>アプリケーション技術</th><th>エクスペリエンス技術</th></tr>
+      <tr><td>①クラウドコンピューティング<br>②ビッグデータ（DMP活用）<br>③通信技術（5G/IOWN）<br>④IoT</td>
+          <td>⑤生成AI<br>⑥ロボット/RPA<br>⑦WEB3/NFT<br>⑧メタバース</td>
+          <td>⑨メガプラットフォーム<br>⑩サブスクリプション<br>⑪D2C/ECサイト<br>⑫CRM</td></tr>
+    </table>
+
+    <h3>3-1. インフラ技術</h3>
+    <h4>①クラウドコンピューティング</h4>
+    <p><b>インターネット経由でサーバー・ストレージ・ソフトウェアなどのコンピュータ資源を利用できる仕組み</b>。自社でハードウェアを保有・管理する必要がなく、必要なときに必要なだけ使える柔軟性がある。代表例は<span class="term">AWS</span>、<span class="term">Microsoft Azure</span>、<span class="term">Google Cloud</span>。AWSでは仮想サーバーの<span class="term">EC2</span>、仮想ストレージの<span class="term">S3</span>が代表的。NetflixやSpotify、Airbnbなど多くのサービスがAWSに依存している。</p>
+    <h4>②ビッグデータ（DMP活用）</h4>
+    <p>個人PCでは解析できない大規模データ（億レコード級）を分析・活用するツールが<span class="term">DMP（Data Management Platform）</span>。エクセルのタブを増やして一つのファイルにするように、複数データを統合して横断的に関数処理（sumやaverage等）できる。会員情報・購買情報・キャンペーン参加・WEBログ・アプリログなどを、キーIDで連携（vlookupのイメージ）し、<span class="term">API</span>で外部ツール（Tableau等）へ引き渡す。API＝アプリとアプリを繋げる仕組み全般。</p>
+    <h4>③通信技術（5G/IOWN）</h4>
+    <p><span class="term">5G</span>＝第5世代移動通信システム。<b>大容量・高速・低遅延</b>なネットワークを提供し、自動運転などの基盤として期待される。<span class="term">IOWN（Innovative Optical and Wireless Network）</span>構想は、電気ではなく<b>光</b>を中心とした情報技術で高速・低遅延・大容量・省電力を実現する構想（NTT提唱）。</p>
+    <h4>④IoT</h4>
+    <p><span class="term">IoT（モノのインターネット）</span>＝様々なモノがインターネットにつながり、<b>状況把握と遠隔操作</b>を高い自由度で実現する。養鶏・農業のモニタリング自動化、オフィスにビーコンを置いて社員の動線を可視化する例などがある。</p>
+
+    <h3>3-2. アプリケーション技術</h3>
+    <h4>⑤生成AI</h4>
+    <p>生成AIの進化は著しく、10年以内に<span class="term">AGIレベル3</span>に到達するとも言われる。<span class="term">Google DeepMind</span>が提案したAGIの5レベル：</p>
+    <table class="tb">
+      <tr><th>Lv</th><th>名称</th><th>概要</th></tr>
+      <tr><td>1</td><td>Emerging AGI</td><td>未熟な人間と同等かやや優れる（例：Gemini・ChatGPT・Copilot）</td></tr>
+      <tr><td>2</td><td>Competent AGI</td><td>熟練成人の50%より優れる（未達成）</td></tr>
+      <tr><td>3</td><td>Expert AGI</td><td>熟練成人の90%より優れる。AIが主導し人間は助言（未達成）</td></tr>
+      <tr><td>4</td><td>Virtuoso AGI</td><td>熟練成人の99%より優れる（未達成）</td></tr>
+      <tr><td>5</td><td>ASI（Artificial Superintelligence）</td><td>100%人間より優れる（未達成）</td></tr>
+    </table>
+    <p>(1)自己学習能力、(2)実世界からのデータ取得手段、(3)人間の共感を得られる振る舞い、の3つを獲得すれば急速にレベル3に到達するとも言われる。AIの進化軸は言語AI→AIエージェント→<span class="term">フィジカルAI</span>（現実世界を認識・操作する身体を持ったAI）へ。</p>
+    <h4>⑥ロボット/RPA</h4>
+    <p><span class="term">RPA（Robotic Process Automation）</span>＝これまで人間のみが対応可能とされていた作業を、ルールエンジンやAI・機械学習等の認知技術で代行・代替する取り組み。Google App Script（GAS）などでAPI連携や自動処理を無料で始められる。</p>
+    <h4>⑦WEB3/NFT</h4>
+    <p><span class="term">NFT</span>を活用し、学生など顧客と中長期的な接点・エンゲージメントを創出する事例がある（NFT配布＋LINE登録促進など）。</p>
+    <h4>⑧メタバース</h4>
+    <p><span class="term">メタバース</span>＝インターネット上に構築された仮想（3D）空間で、ユーザーがアバターを通じて交流・活動・経済行動を行えるデジタル世界。ゲーム・ビジネス・教育など多様な分野で新たな体験・経済活動の場として注目。バーチャルショッピング（没入感・異日常・表現力・差別化）などに活用。</p>
+
+    <h3>3-3. エクスペリエンス技術</h3>
+    <h4>⑨メガプラットフォーム</h4>
+    <p><span class="term">GAFA</span>などのメガプラットフォームは、世界規模で情報・通信・流通・広告を支配し、独自のエコシステムで個人・企業の行動を変革。クレジットカード1枚で誰でも広告を出稿できる（YouTube約1円/表示、バナー約0.1円/表示）。</p>
+    <h4>⑩サブスクリプション</h4>
+    <p><span class="term">サブスクリプション</span>＝定額料金を支払うことでサービスを継続的に利用できる仕組み。動画配信は<span class="term">AVOD</span>（広告型・無料）と<span class="term">SVOD</span>（サブスク型・有料）の2パターン。車のサブスクにもKINTO（自家用車感覚）とタイムズ（レンタカー感覚）など様々。</p>
+    <h4>⑪D2C/ECサイト</h4>
+    <p><span class="term">D2C（Direct to Consumer）</span>＝ブランドが消費者へ直接商品を販売するビジネスモデル。自社ECを活用し、ブランド独自の世界観や顧客体験を重視。楽天・Amazonの2強やキャリア系ECが強く、真っ向勝負は困難なため、創業者の実体験や独自価値を起点にする例が多い。</p>
+    <h4>⑫CRM</h4>
+    <p><span class="term">CRM（Customer Relationship Management）</span>＝顧客との関係を深め、長期的なロイヤルティと収益向上を目指すアプローチ／仕組み。潜在顧客の早期取り込みと、既存顧客から新しい顧客への波及を生み出す。</p>
+    <div class="box key">
+      <h4>CRMで重要な3つの法則（頻出）</h4>
+      <ul class="clean">
+        <li><b>2:8の法則（パレートの法則）</b>：上位20%の顧客が売上の80%を占める。</li>
+        <li><b>1:5の法則</b>：新規顧客への販売コストは既存顧客の5倍かかる。</li>
+        <li><b>5:25の法則</b>：顧客離れを5%改善すれば、利益が25%改善される。</li>
+      </ul>
+      <p>→ アップセル／クロスセル／ロイヤリティマーケティングが重要。ANAのSFC（スーパーフライヤーズカード）と「SFC修行」が代表例。</p>
+    </div>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 4 -->
+  <section class="unit" id="u4">
+    <h2>第4単元　DXを阻む要因と日本の課題</h2>
+
+    <h3>4-1. デジタル後進国「日本」</h3>
+    <p>IMD世界デジタル競争力ランキング（2024）で日本は68.1点と低位。ただし内訳を見ると、<b>インターネット普及率・モバイルブロードバンド普及率・IT導入・クラウド活用などインフラ環境はかなり整備されている</b>。一方で、<b>グローバル人材の不足、先端技術領域の法規制の出遅れ、ベンチャーキャピタルの弱さ、意思決定スピードの遅さ</b>が課題。「ヒト・モノ・カネの最適配置」がうまくいっていない。<span class="term">ユニコーン企業</span>（2000年以降設立・評価額10億ドル以上の未上場企業）の数も日本は9社と圧倒的に少ない（米国703社・中国340社）。なお、QRコードは日本の発明。</p>
+
+    <h3>4-2. 日本の労働生産性</h3>
+    <p><span class="term">労働生産性</span>（時間あたりに生み出される付加価値）は主要国で最下位クラス。米国を100とすると<b>日本は58.1</b>（6割未満）。労働生産性が低いと幸福度も低い。要因は<b>文化的要因（完璧主義な袋叩き文化、縦割り組織）・システム的要因（アナログ時代から変わらない法規制、デジタル基盤普及の遅れ）・環境的要因（高齢化と労働人口減少、非正規雇用の増加）</b>に分けられる。コロナのように環境要因で強制的に進歩するケースもあるが、社会全体の「根詰まり」が根源的要因。</p>
+
+    <h3>4-3. EBPMと統計手法</h3>
+    <p><span class="term">EBPM（Evidence-Based Policy Making＝証拠に基づく政策立案）</span>とは、政策の企画をその場限りのエピソードに頼るのではなく、政策目的を明確化した上で<b>合理的根拠（エビデンス）に基づくもの</b>とすること。政策課題の設定→アウトカム設定→政策オプション比較→エビデンス収集分析→実施とモニタリング→評価とフィードバック、というサイクルで進める。</p>
+    <div class="box">
+      <h4>EBPMで使われる代表的な統計手法（因果推論）</h4>
+      <ul class="clean">
+        <li><b>PSM-DID</b>：傾向スコアマッチング＋差分の差分法</li>
+        <li><b>IPW-DID</b>：傾向スコア逆確率重みづけ法＋差分の差分法</li>
+        <li><b>RDD</b>：回帰不連続デザイン（閾値の前後で介入効果を推定）</li>
+      </ul>
+    </div>
+
+    <h3>4-4. 個人・企業レベルで生産性を上げる方法</h3>
+    <h4>①選択と集中を徹底する</h4>
+    <p>あれもこれもと平均を取ると小さなベクトルにしかならない。同じ方向にみんなで進み高め合う。多様性は大事だが<b>大前提としてバイブスの合うチーム構成</b>が重要。また<b>「大事な議論」と「意見が出やすい議論」は違う</b>ことに注意（<span class="term">パーキンソンの法則</span>：駐輪場の屋根の色のような些末な議題ほど意見が出て、原発建設の是非のような重要議題は意見が出にくい）。</p>
+    <h4>②無形資産を意識する</h4>
+    <p><span class="term">無形資産</span>（ノウハウ・ブランド・商品のファンなど）がないと、1の労働力で1しか生み出せない。無形資産があると労働生産性が高まる。日本は無形資産の後進国でもある。<span class="term">人的資本</span>・組織改編・ブランドといった無形資産の視点を持つことが重要。</p>
+
+    <h3>4-5. DX実務と提案の作り方（スピンオフ）</h3>
+    <p>仕事の生まれ方は<b>自主提案型・コンペ型・デリバリー型</b>の3つ。DX実務の難しさは<b>「オリジナリティ」と「正しさ」のバランス</b>を取ること（正しいだけでは「もうやってる」、オリジナリティだけでは「やる意味が不明」になる）。提案は一本の「線」ではなく、論点に抜け漏れのない「面」を目指す。提案資料には必ず<span class="term">キースライド</span>（このページさえ読めば大枠が伝わる1枚）を入れ、「論点の網羅性」と「メッセージ性」を両取りする。事実の列挙ではなく<b>言いたいことをメッセージに仕立てる</b>。</p>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 5 -->
+  <section class="unit" id="u5">
+    <h2>第5単元　認知領域のマーケティングDX</h2>
+    <p>マーケティングDXの領域は<b>❶認知 ❷体験 ❸継続 ❹戦略支援</b>で整理される。本単元は「認知（はじめまして）」。</p>
+
+    <h3>5-1. なぜカスタマージャーニーが必要なのか</h3>
+    <p>昔は「良い掃除機を作れば売れる」時代だったが、今はルンバや家事代行など選択肢が多く、<b>「一連の体験の中で生み出される総合価値」</b>（商品そのものの価値＋周辺体験）を考える必要がある。例：<b>ルンバのサブスク</b>は「買って失敗したらどうしよう」という購入課題に対し、月額でお試しでき「悩まなくて良い」という新しい体験価値を生んだ。</p>
+
+    <h3>5-2. 認知の変化：物量から最適化へ</h3>
+    <p>かつて認知獲得の主な変数は<b>クリエイティブと物量</b>だった（TVCMの<span class="term">GRP＝視聴率の総和</span>など）。生活者の行動が多様化した2000年代以降は、これに加えて<b>「最適化」（届けるべき人に届ける）</b>が重要に。</p>
+
+    <h3>5-3. 最適化された認知コミュニケーション</h3>
+    <ul class="clean">
+      <li><span class="term">デジタルターゲティング広告</span>：Google・Metaなどが行動データで顧客をセグメント分割し配信。</li>
+      <li><span class="term">p-max</span>：Googleの自動最適化手法。検索・YouTube・Gmail・Discover・ディスプレイ・マップなど複数枠を横断配信し、機械学習で成果最大化。</li>
+      <li><span class="term">DOOH（Digital Out Of Home）</span>：デジタル屋外広告。街中や交通機関のデジタルサイネージを使う。パブの混み具合に応じて配信するなど自由度が高い。</li>
+      <li><span class="term">リアルタイムデータ連動広告</span>：気温・天候・SNS投稿量などリアルタイムデータに合わせて出稿タイミング・量を制御。味の素「鍋キューブ」（気温が下がると配信）、スウェーデンのスピードカメラくじが例。</li>
+      <li><span class="term">コンテンツマーケティング</span>：広告ではなく価値ある情報（コンテンツ）を提供して信頼関係を築き、購買やロイヤルティにつなげる手法（よなよなエール「よなよなの里」など）。</li>
+    </ul>
+
+    <h3>5-4. 2026年以降のマーケティング</h3>
+    <p>情報爆発とAIエージェント到来により、「情報を記憶し、考え、選ぶ行為」そのものがプラットフォームに外部化される。最適化に加えて<b>「いくつ起爆的なコミュニティ施策を積み上げられるか」</b>が問われ、再び物量（起爆数）の時代へ。ポイントは<b>①ユーザーの興味の閾値を超えているか ②一度で終わらず連続的な体験を生み出せるか</b>。</p>
+
+    <h3>5-5. データを活用した最適プランニング（TV×YouTube予算配分）</h3>
+    <p>投下コスト→成果を予測する基本モデルを、3つのデータで設計する：</p>
+    <table class="tb">
+      <tr><th>データ</th><th>意味</th></tr>
+      <tr><td>リーチカーブ</td><td>いくら投下したらどのくらいのリーチが取れるか（近似曲線で係数化）</td></tr>
+      <tr><td>態度変容確率パラメータ（転換率）</td><td>媒体接触でどのくらい態度変容が起きるか</td></tr>
+      <tr><td>重複係数（α）</td><td>媒体のリーチがどのくらい重複するか</td></tr>
+    </table>
+    <p>統合リーチ ＝ TVのみ＋YouTubeのみ＋重複部分。制約条件（予算≤5億円）の中で統合リーチを最大化する予算比率を探す。必要スキルは<b>関数フィッティング（最小二乗法・適切な近似関数の選定）、リーチモデル選定、最適化モデル作成（最適化アルゴリズム・コーディング実装）</b>。</p>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 6 -->
+  <section class="unit" id="u6">
+    <h2>第6単元　体験領域のマーケティングDX</h2>
+    <p>「体験（使ってみる）」領域。顧客視点で「自分だったらこんな体験したい」から理想を描くことが大事。</p>
+
+    <h3>6-1. 体験領域の代表的な技術・概念</h3>
+    <table class="tb">
+      <tr><th>用語</th><th>意味・事例</th></tr>
+      <tr><td><span class="term">OMO（Online Merges with Offline）</span></td><td>オンラインとオフラインの垣根をなくし顧客体験を一体化する考え方。ユニクロが実店舗とEC在庫をリアルタイム連動。</td></tr>
+      <tr><td><span class="term">RFID</span></td><td>電波でICタグを非接触読み取りする技術（バーコードの進化）。ユニクロの無人レジ。</td></tr>
+      <tr><td><span class="term">ライブコマース</span></td><td>ライブ配信で商品紹介しその場で購入できる手法（TV通販＋SNS＋EC）。中国Taobao Liveが代表。</td></tr>
+      <tr><td><span class="term">経済圏構築</span></td><td>自社サービス・決済・ポイント・データを連携し囲い込み型の生活圏を形成しLTV最大化。楽天経済圏。※ポイントは使わせることが大事。</td></tr>
+      <tr><td><span class="term">リテールメディア</span></td><td>小売企業が自社の購買データ・顧客接点を活用して広告枠・販促機会を提供するメディアビジネス。トライアルのタブレットカート。</td></tr>
+      <tr><td><span class="term">インドアマッピング</span></td><td>建物内の位置情報を可視化・デジタル化し屋内ナビ・分析に活用。Oriientは磁場センサーで測位。</td></tr>
+      <tr><td><span class="term">レコメンドエンジン</span></td><td>行動履歴・属性から「合いそうな商品」を自動提示。Amazonは<b>協調フィルタリング</b>を中心に採用。</td></tr>
+    </table>
+
+    <h3>6-2. RFMからRFMCへ</h3>
+    <p>従来は<span class="term">RFM</span>（Recency＝最新購入日、Frequency＝購入頻度、Monetary＝購入金額）で顧客を分類していたが、新たに<span class="term">クランピネス（Clumpiness）</span>を加えた<span class="term">RFMC</span>という考え方が登場。クランピネスは「定期的に購買する人」⇄「極端に連続して購買する人」のどちらかを指標化する（行動密度）。訪問日に偏りがあるユーザーで高い数字が出る。</p>
+
+    <h3>6-3. メディアの分類</h3>
+    <ul class="clean">
+      <li><span class="term">オウンドメディア</span>：企業や個人が所有・運営し発信するメディア（自社サイト・SNS）。Red Bull。</li>
+      <li><span class="term">アーンドメディア</span>：第三者によって自発的に発信されるメディア露出。企業のコントロールが及ばない分、信頼性・影響力が高い。アフィリエイト広告など。</li>
+      <li><span class="term">分散型メディア</span>：自社PFだけでなくYouTube・Instagram等にコンテンツを分散させる考え方。</li>
+    </ul>
+    <p>マネタイズは「カスタマージャーニー起点（一人に何度もお金を落としてもらう）」と「1日の行動・可処分時間起点（他サービスとの時間の奪い合いに勝つ）」の両視点で設計する。</p>
+
+    <h3>6-4. DXコンセプト設計</h3>
+    <p>よくある失敗は「DXの概要や手順を順当に説明するだけ（＝仮説がない）」で、研究発表に近くなること。大事なのは<b>仮説</b>——現時点で正しいか分からなくても新しい着眼点を織り交ぜること。例：高知の商店街DX→「日本式のワールドバザール」、スポーツDX→「プレイヤーが絶対君主の練習体験」のように、正しく定量化はできなくても<b>みんながイメージできる言語化</b>をする。</p>
+    <div class="box">
+      <h4>コンセプトの作り方（デザイン思考に近い）</h4>
+      <p>アイデアは基本<b>掛け算</b>で考える。「従来のサービス × ○○」の○○の組み合わせで面白くする。普通の体験をちょっとずらすことに意義がある。ウォルト・ディズニーは思考を<b>①空想家 ②現実主義者 ③批評家</b>の3段階に分けた。まずは「空想家」の視点で右脳的に発想を膨らませる。</p>
+    </div>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 7 -->
+  <section class="unit" id="u7">
+    <h2>第7単元　継続領域のマーケティングDXとフレームワーク</h2>
+    <p>「継続（使い続ける）」領域。従来のマーケティングは「買わせるまで」がメインだったが、継続まで考えることが大きな変革要因となる。</p>
+
+    <h3>7-1. 主要マーケティングフレームワーク</h3>
+    <table class="tb">
+      <tr><th>フレーム</th><th>内容</th></tr>
+      <tr><td><span class="term">PEST分析</span></td><td>企業がコントロールできないマクロ外部環境を分析。Political（政治・法）／Economical（経済）／Social（社会・文化）／Technological（技術）の4つ。</td></tr>
+      <tr><td><span class="term">3C分析</span></td><td>市場全体像を把握。Customer（顧客）／Company（自社）／Competitor（競合）の3つを分析。</td></tr>
+      <tr><td><span class="term">RFM分析</span></td><td>Recency（最終購入日）／Frequency（購入頻度）／Monetary（購入金額）で顧客をセグメント化。</td></tr>
+      <tr><td><span class="term">9segs（9セグメント分析）</span></td><td><b>西口一希</b>氏が提唱。購入ファネルと心理ファネル（次回購買意向）の両軸で顧客を9セグメントに数値化。</td></tr>
+    </table>
+    <p>マーケティングの進化は、①環境を明確化しポジションを作る従来型 → ②顧客セグメンテーションの精緻化・最適化（第一の進化）→ ③“売って終了”ではなく継続的接点で<span class="term">LTV（顧客生涯価値）</span>を高める、という流れ。</p>
+
+    <h3>7-2. ファネルとCRM</h3>
+    <p><span class="term">ファネル</span>＝消費者の購買プロセスを漏斗（Funnel）の形で図式化したもの。購買以降のリピート・ロイヤル化まで表す<span class="term">デュアルファネル（ダブルファネル）</span>が一般化。<span class="term">CRM</span>＝企業が顧客と長期的な関係を築き価値を創造する戦略。<b>2:8（パレート）・1:5・5:25の法則</b>から、少数の既存顧客の維持・再販売に費やす方が利益が向上する（アップセル／クロスセル／ロイヤリティマーケティング）。</p>
+
+    <h3>7-3. 継続領域の技術・手法</h3>
+    <ul class="clean">
+      <li><span class="term">ファンマーケティング</span>：ファンとの関係を深め、共感・熱量を軸に継続購買・拡散を促す（USJ、BrewDogの株式投資型クラファン「Equity for Punks」）。</li>
+      <li><span class="term">ミニアプリ</span>：LINEやWeChat内で起動・利用できる軽量アプリ。インストール不要（飲食店向け「ダイニー」）。</li>
+      <li><span class="term">新しい購買証明</span>：レシートに加えスマホ撮影・決済データで購買を証明（電通「SCAN DA CAN」）。</li>
+      <li><span class="term">クチコミ/UGC分析</span>：SNS・レビューの顧客の声（VOC）をAIで解析（見える化エンジン）。</li>
+      <li><span class="term">ロイヤリティプログラム</span>：継続利用にポイント・特典を提供（ANAマイレージ・SFC）。単なるポイントに留めず、ファンイベント・限定コンテンツなど「受け皿」を用意しコミュニティを盛り上げる。</li>
+      <li><span class="term">Design Sprint</span>：Googleが提唱。課題発見〜プロトタイプ作成〜ユーザーテストを短期間で行う問題解決型デザイン手法（Understand→Sketch→Decide→Prototype→Research）。「How might we?」を使う。</li>
+    </ul>
+
+    <h3>7-4. データを活用したLTV予測モデル</h3>
+    <p>会員登録だけを目標にすると「ポイントだけもらって使わないユーザー」が増える。より事業成長につながるには<b>登録後の利用・継続利用（LTV）</b>を目標にする。計測期間の購買行動から将来を予測する。</p>
+    <div class="box key">
+      <h4>Pareto/NBDモデル（頻出）</h4>
+      <p>最も一般的なLTV予測モデル。顧客のRFM情報から<b>階層ベイズモデル</b>を構築し、以下のパラメータを求める。</p>
+      <ul class="clean">
+        <li><b>λ（ラムダ）</b>：顧客の単位期間あたりの購入回数の期待値 →カウントデータなので<b>ポアソン分布</b></li>
+        <li><b>μ（ミュー）</b>：顧客が非アクティブ化するまでの時間の期待値 →時間なので<b>指数分布</b></li>
+        <li><b>η（イータ）</b>：顧客の1回あたりの購入金額の期待値</li>
+      </ul>
+      <p>必要スキル：統計知識（階層ベイズ・ポアソン分布・ガンマ分布）、LTV算出モデル（Pareto/NBD・BG/NBD）、クラウド（AWS・GCP）。</p>
+    </div>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 8 -->
+  <section class="unit" id="u8">
+    <h2>第8単元　戦略領域のマーケティングDXと生成AI活用</h2>
+
+    <h3>8-1. 戦略とは</h3>
+    <p><span class="term">戦略</span>とは「目的を達成するために、限られた資源をどう配分し、どの道筋で勝ちにいくかを決める考え方・方針」＝<b>目的達成のための「選択と集中」の筋道</b>。実務では事業環境分析→事業/マーケティング戦略策定→実行計画策定を網羅的に検証し一つの指針に落とす。</p>
+
+    <h3>8-2. データとインテリジェンス</h3>
+    <p><span class="term">データ</span>はいわゆる情報そのもの。<span class="term">インテリジェンス</span>は人の意思決定を賢くするための“頭脳”としての機能（示唆）。検索で得られるのはデータだけだが、生成AIはデータにインテリジェンス（示唆）を加える。</p>
+
+    <h3>8-3. 事業貢献性の把握と効果検証</h3>
+    <ul class="clean">
+      <li><span class="term">ROI</span>＝得られた利益 ÷ 投資額。「投資に対しどれだけ利益を得たか」。</li>
+      <li><span class="term">A/Bテスト</span>：AパターンとBパターンを同時に小規模実施し、市場投入前に顧客反応を実データで確認。</li>
+      <li><span class="term">Causal Impact</span>：Googleが開発したベイズモデルベースの手法。<b>施策がなかった場合の予測値（ベースライン）と実測値を比較</b>して効果を可視化。PythonやRで実装可能。</li>
+      <li><b>顧客構造変化</b>：LTVや離脱率の変化を踏まえ「顧客の質の変化」を反映したROIを評価。</li>
+    </ul>
+
+    <h3>8-4. 生成AI活用がうまくいきやすいパターン</h3>
+    <div class="box key">
+      <ul class="clean">
+        <li><b>❶仕組み化</b>：いくつかの機能を連動させ自動化（生成AI×エクセルなど、組み合わせて価値を作る）。</li>
+        <li><b>❷具体プロセス置換</b>：人間が行う具体プロセスを細分化し一部を生成AIに置換。</li>
+        <li><b>❸大量処理</b>：人間で処理できない膨大なインプット（大量のSNSデータ・YouTube字幕等）から示唆を得る。</li>
+      </ul>
+    </div>
+    <table class="tb">
+      <tr><th>生成AIが得意なこと</th><th>生成AIが苦手なこと</th></tr>
+      <tr><td>リサーチ（検索の延長）／情報の整理・要約／網羅的な羅列（ブレスト）／情報の解釈／構想の構造化・言語的補足</td><td>背景を考慮した仮説設計／意思決定に向けた情報収束／Will（実行力）／丸投げ／“その人らしさ”の再現／プランニング／四則演算・モデリング／因果推論</td></tr>
+    </table>
+    <p>実務レベルでは現状「人間 ≧ 生成AI」。生成AIの出力は「よくある一般論の網羅版」で、手慣れの人がAIを使うと強い。マーケティングDXでは商品開発（AIペルソナ・コンセプト精緻化）、グローバル戦略（ローカライズ）、マーケティングプロセス変革（従来150h→AI導入後4hなど）で活用が進む。</p>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 9 -->
+  <section class="unit" id="u9">
+    <h2>第9単元　基幹業務DX（管理部門）</h2>
+
+    <h3>9-1. 基幹業務DXとは</h3>
+    <p><span class="term">基幹業務DX</span>＝あらゆる企業運営に不可欠な<b>管理部門（バックオフィス）</b>が取り組むDX。管理部門は企業の経営・事業運営を支える管理・事務系業務全般で、<b>人事労務・経理・法務・情報システム</b>などが含まれ、“経営企画”の中心に位置づけられることが多い。</p>
+    <div class="box key">
+      <h4>基幹業務DXの3つの効果（頻出）</h4>
+      <ul class="clean">
+        <li><b>❶無駄な作業削減</b>：定型業務（勤怠管理・仕訳・契約書レビュー等）の自動化。例：GO BUSINESS。</li>
+        <li><b>❷情報の一元管理</b>：散在情報を統合しデータの精度・即時性を向上、戦略データとして活用。例：jinjer。</li>
+        <li><b>❸属人化の排除</b>：手続きのデジタル化で担当者依存から脱却。証跡が残り内部統制・監査対応も強化。例：楽楽精算。</li>
+      </ul>
+    </div>
+    <p>管理部門は単独で仕事をしているわけではなく、経理部でなくても経理作業は発生する。DX人材でも人事・経理・法務と円滑に連携できる人はビジネスの実行力が高い。</p>
+
+    <h3>9-2. 人事DXの潮流</h3>
+    <p>従来、人事は利益を直接生まない<span class="term">コストセンター</span>と位置づけられた（対して営業・開発・マーケは<span class="term">プロフィットセンター</span>）。現在は<span class="term">人的資本経営</span>の考え方が浸透し、企業価値向上を目指す役割へ進化。「人的資本への投資・人材育成」を起点に、エンゲージメント向上・イノベーション創出・企業競争力強化・事業成長のサイクルを回す。</p>
+    <ul class="clean">
+      <li><b>人材配置の適正化／タレントマネジメント</b>：Talent Palette（スキル等を可視化しサクセッションプランを見える化）。</li>
+      <li><b>配置シミュレーション</b>：SmartHR（人事労務情報を一元管理し配置案を比較）。</li>
+      <li><span class="term">マーケットデザイン</span>：「誰に何をどのような手続きで割り当てるか」というルール・制度を工学的に設計する経済学の一分野（オリックス生命の営業配置最適化AI）。</li>
+    </ul>
+
+    <h3>9-3. 経理DXの潮流</h3>
+    <ul class="clean">
+      <li><span class="term">電子帳簿保存法</span>の改正により証憑の電子保存が義務化され、紙中心からの脱却が加速。</li>
+      <li><span class="term">インボイス制度</span>：適格請求書発行事業者は登録番号の記載が義務化。売上と仕入データが税務上明確に紐づく。</li>
+      <li><span class="term">会計ソフト</span>：freee（クラウド型、銀行連携で仕訳・帳簿を自動化）。</li>
+      <li><span class="term">AI-OCR</span>：AI技術を取り入れた光学文字認識。手書き回答のデータ化など（スルガ銀行で作業を6分の1に）。</li>
+    </ul>
+
+    <h3>9-4. 法務DXの潮流</h3>
+    <ul class="clean">
+      <li><span class="term">リーガルテック</span>：法務×テクノロジー。行政デジタル化・法整備で市場拡大。</li>
+      <li><span class="term">電子契約サービス</span>：契約の作成〜締結〜保管をオンライン完結。印紙・郵送・押印不要（クラウドサイン＝国内シェアNo.1）。</li>
+      <li><span class="term">AI契約審査</span>：契約書をAIが自動解析し不利条項・リスクを検出（LegalForce）。</li>
+    </ul>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 10 -->
+  <section class="unit" id="u10">
+    <h2>第10単元　サプライチェーンDX</h2>
+
+    <h3>10-1. サプライチェーンとは</h3>
+    <p><span class="term">サプライチェーン</span>とは<b>調達→製造→物流→販売→消費</b>に至る一連の流れのこと。カスタマージャーニーが「企業と顧客の接点」なら、サプライチェーンは「商品製造における企業と企業の接点」を表し、同様にマップ形式で描かれることが多い。同じ商品でも構造は異なる。中間商流をカットすれば良いとは限らず、選別・加工の機能により大規模に効率化することで価格が最適化される（適切な作業の塊を作ることも重要）。令和の米騒動も広義にはサプライチェーン（商流の複雑化・価格構造の不透明化）の問題。</p>
+
+    <h3>10-2. サプライチェーンDXの全体像</h3>
+    <p><span class="term">サプライチェーンDX</span>＝調達・生産・物流・販売までの流れをリアルタイムに可視化・最適化し、<b>全体最適な経営判断</b>を可能にすること。</p>
+    <table class="tb">
+      <tr><th>ステージ</th><th>DX施策</th><th>効果</th></tr>
+      <tr><td>調達</td><td>サプライヤー情報の電子化・在庫連携</td><td>リードタイム短縮・リスク管理</td></tr>
+      <tr><td>生産</td><td>IoTによる稼働状況のリアルタイム把握</td><td>生産計画の自動調整・歩留まり改善</td></tr>
+      <tr><td>在庫</td><td>AI需要予測による自動発注・補充</td><td>欠品・過剰在庫の削減</td></tr>
+      <tr><td>輸送</td><td>GPS・TMSによる輸送状況の可視化</td><td>遅延対応・最適ルート選定</td></tr>
+      <tr><td>販売</td><td>需要動向をリアルタイムに反映</td><td>需要に即した供給調整・販促最適化</td></tr>
+    </table>
+
+    <h3>10-3. サプライチェーンDXの代表技術</h3>
+    <ul class="clean">
+      <li><span class="term">デジタルマニュファクチャリング</span>：短納期・小ロット前提で設計〜製造を一気通貫最適化（Panasonic）。</li>
+      <li><span class="term">生産管理のIoT化</span>：センサーで稼働・振動・温湿度を可視化、異常検知・予知保全（NTT東日本「置くだけIoT」）。</li>
+      <li><span class="term">3Dプリンター/デジタル在庫</span>：パーツの3D CADデータだけを管理し、必要時にプリント（ストラタシス）。在庫削減・リードタイム短縮。</li>
+      <li><span class="term">AI需要予測</span>：過去データ等から必要量を高精度予測し在庫最適化（アスクル）。</li>
+      <li><span class="term">TMS（Transport Management System）</span>：輸配送の計画・手配・進捗管理を一元管理（Hacobu「MOVO」、バース管理）。</li>
+      <li><span class="term">ネットスーパーのロボティクス化</span>：ピッキング・仕分けをロボットで自動化（イオンネクスト、英オカド技術）。</li>
+      <li><span class="term">クラウドファンディング</span>：事前に需要を把握し在庫リスクを抑えた商品開発・販売（xTool）。</li>
+    </ul>
+
+    <h3>10-4. 経済性以外の要素（環境・トレーサビリティ）</h3>
+    <p><span class="term">TCFD（Task Force on Climate-related Financial Disclosures）</span>は、G20／FSBが2015年に設立した国際タスクフォースで、<b>気候変動による財務リスク・機会の開示</b>を推奨。開示項目は<b>ガバナンス・戦略・リスク管理・指標と目標</b>の4つ。財務諸表（PL/BS）に加え非財務情報の重要性が高まっている。</p>
+    <div class="box">
+      <h4>GHG（温室効果ガス）排出量のScope分類</h4>
+      <ul class="clean">
+        <li><b>Scope 1</b>：直接排出（自社工場・社有車の燃料燃焼など）</li>
+        <li><b>Scope 2</b>：間接排出（他社から購入した電力・熱の使用に伴う排出）</li>
+        <li><b>Scope 3</b>：その他の間接排出（原材料調達・製品輸送・使用・廃棄などサプライチェーン全体）</li>
+      </ul>
+    </div>
+    <p>今後のサプライチェーンDXは経済的最適化だけでなく<span class="term">トレーサビリティ</span>（その製品がいつ・どこで・誰によって作られたかを、調達から廃棄まで追跡可能にすること）向上の視点も加わる。水産物の<span class="term">MSC認証</span>は欧米で一般化し、認証がないと大手小売に並びにくい。</p>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+
+  <!-- UNIT 11 -->
+  <section class="unit" id="u11">
+    <h2>第11単元　DX事例研究・関連用語のまとめ</h2>
+
+    <h3>11-1. パーパスとビジョン</h3>
+    <table class="tb">
+      <tr><th>用語</th><th>意味</th></tr>
+      <tr><td><span class="term">パーパス（Purpose）</span></td><td>Why：存在意義。例：味の素「アミノサイエンス®で、人・社会・地球のWell-beingに貢献する」。</td></tr>
+      <tr><td><span class="term">ビジョン（Vision）</span></td><td>Where：目指す姿。例：ソニー「エンタテインメントとテクノロジーを融合し、新しい感動体験を提供し続ける企業になる」。</td></tr>
+    </table>
+
+    <h3>11-2. システム・IT関連の基本用語</h3>
+    <table class="tb">
+      <tr><th>用語</th><th>意味</th></tr>
+      <tr><td><span class="term">グループウェア</span></td><td>「みんなで仕事をするための道具」。メール・スケジュール・チャット・Web会議・ファイル共有など。</td></tr>
+      <tr><td><span class="term">SaaS（Software as a Service）</span></td><td>ソフトを「買う」のではなく「借りる」仕組み。初期費用が安く更新は自動。</td></tr>
+      <tr><td><span class="term">クラウド</span></td><td>データやソフトが会社ではなくインターネット上にある。どこでも使える・更新が簡単・災害に強い。</td></tr>
+      <tr><td><span class="term">オンプレミス</span></td><td>会社の中にサーバを置く方法。自由に管理できるが費用が高い。</td></tr>
+      <tr><td><span class="term">ERP（Enterprise Resource Planning）</span></td><td>会社全体（販売・在庫・会計・人事）をまとめ、すべてつなげるシステム。</td></tr>
+      <tr><td><span class="term">CRM</span></td><td>顧客を管理するシステム。購入履歴・好みなどを営業・販売に活用。</td></tr>
+    </table>
+    <p>これらはすべてクラウドまたはオンプレミスで動いている。</p>
+
+    <h3>11-3. ITベンダーとシステム開発の歴史</h3>
+    <p><span class="term">ITベンダー</span>＝企業のシステムを作る・提供する会社。種類は<b>コンサルティング会社（何を作るべきか考える）・SIer（システムを作る）・ソフトウェア会社（プログラム開発）・クラウド事業者（サービス提供）</b>。システムは、1960年代メインフレーム→1980年代PC→1990年代クライアント・サーバ→2000年代Webシステム→2010年代クラウド・SaaS→2020年代〜生成AI、と変化。昔はオーダーメイドで高価・時間がかかったが、今はSaaS＋AI＋クラウドを組み合わせ、安く・早く・自動更新に。</p>
+
+    <h3>11-4. DX銘柄</h3>
+    <p><span class="term">DX銘柄</span>は<b>経済産業省と東京証券取引所</b>が選定し、デジタルで企業価値を高める先進企業を表彰する制度。選定基準は「デジタル技術を活用したビジネスモデル変革」「組織・プロセス・文化の変革」「中長期的な競争力向上」。2025年はDX銘柄31社、DX注目企業19社、DXプラチナ企業（3年連続選定）1社、特に優れた<b>DXグランプリ</b>2社が選定された。</p>
+
+    <h3>11-5. データマネジメント基盤</h3>
+    <p>企業データは部署ごとにバラバラのシステムに眠りがち＝<span class="term">データのサイロ化（孤立化）</span>。これを解決するのが<span class="term">データマネジメント基盤</span>で、以下の一連の仕組み：</p>
+    <ul class="clean">
+      <li><span class="term">データレイク</span>：データを一箇所に集める。</li>
+      <li><span class="term">データウェアハウス</span>：使いやすい形にきれいに整理・加工する。</li>
+      <li><span class="term">データマート</span>：誰もが安全かつスピーディに分析に使えるようにする。</li>
+    </ul>
+    <p>味の素はデータマネジメント基盤を整備したDX事例。異なる企業のデータを掛け合わせる（例：セブンの購買データ×ドコモの基地局データ）ことで新サービスや課題解決が生まれる一方、プライバシー等の課題もある。</p>
+
+    <h3>11-6. 最新トレンド：Agentic Commerce</h3>
+    <p>小売業の最新DXとして<span class="term">Agentic Commerce</span>（AIエージェントが購買を代行するコマース）が注目されている。世界の次のルールを先に見せる展示会として、CES（ラスベガス・1月・電子技術）、NRF（NY・1月・小売）、MWC（バルセロナ・3月・通信）、SXSW（オースティン・3月・技術文化）、Hannover Messe（ハノーバー・4月・産業技術）などがある。</p>
+    <a class="backtop" href="#top">▲ 目次へ戻る</a>
+  </section>
+</div>
+
+<!-- ================= 問題一覧 ================= -->
+<div id="qlist" class="view">
+  <div class="q-intro">
+    <h2>問題一覧（全150問）</h2>
+    <p>教科書の内容をベースにした<b>4択130問＋記述20問</b>の問題集です。すべて解答・解説付き。演習カテゴリでは、この150問からランダムに30問ずつ出題されます。下のボタンで種類・単元で絞り込めます。</p>
+    <div class="filterbar" id="typeFilter">
+      <button class="active" data-type="all">すべて</button>
+      <button data-type="mc">4択問題（130問）</button>
+      <button data-type="desc">記述問題（20問）</button>
+    </div>
+    <div class="filterbar" id="unitFilter"></div>
+  </div>
+  <div id="qlistBody"></div>
+</div>
+
+<!-- ================= 演習 ================= -->
+<div id="exercise" class="view">
+  <div id="exStart" class="ex-panel">
+    <h2>問題演習</h2>
+    <p>全150問からランダムに<b>30問</b>を出題します。<br>4択問題は選択、記述問題は自由記述で解答してください。<br>1セット終了後に、正答数・各問の採点結果・解説を表示します。</p>
+    <p style="font-size:.82rem;color:var(--sub)">※記述問題は自動採点が難しいため、模範解答を表示し「自己採点」形式で正誤を選べます。</p>
+    <button class="btn" id="startBtn">▶ 演習をはじめる（30問）</button>
+  </div>
+
+  <div id="exRun" class="hidden">
+    <div class="progress" id="exProgress"></div>
+    <div class="pbar"><div id="exPbarFill"></div></div>
+    <div id="exQArea"></div>
+    <div class="exnav">
+      <button class="btn sec" id="prevBtn">← 前へ</button>
+      <button class="btn" id="nextBtn">次へ →</button>
+    </div>
+  </div>
+
+  <div id="exResult" class="hidden"></div>
+</div>
+</main>
+
+<script>
+/* ============ 問題データ ============ */
+/* type: "mc"（4択, answer=正解index） / "desc"（記述, model=模範解答） */
+/* unit: 単元番号 */
+const QUESTIONS = [];
+/* ここに問題を注入 */
+QUESTIONS.push(
+/* ===================== 第1単元 DXの基礎概念（4択12・記述2） ===================== */
+{unit:1,type:"mc",q:"DX（デジタルトランスフォーメーション）における「デジタル（D）」の本質として最も適切なものはどれか。",opts:["ペーパーレス化を進めること","データを活用した変革を行うこと","リモート会議を導入すること","業務を自動化すること"],answer:1,exp:"ペーパーレス・リモート会議・自動化はデータ活用が想定されておらず×。DXの「D」の本質はデータを活用した変革（〇）。"},
+{unit:1,type:"mc",q:"英語圏で変革（transformation）を表す際に用いられる文字はどれか。",opts:["T","X","F","D"],answer:1,exp:"英語圏では変革を「X」と表記する。GX（Green Transformation）、BX（Business Transformation）などが例。"},
+{unit:1,type:"mc",q:"「CX」の意味として最も適切なものはどれか。",opts:["カスタマーエクスペリエンス（顧客体験）","グリーントランスフォーメーション","ビジネストランスフォーメーション","クラウドエクスチェンジ"],answer:0,exp:"CXはCustomer Experience（顧客体験）を指す。授業冒頭のクイズでも扱われた。"},
+{unit:1,type:"mc",q:"「イノベーションによって古い産業やビジネスモデルが破壊され、同時に新しい価値が創造される経済の進化プロセス」を表す概念はどれか。",opts:["ムーアの法則","創造的破壊（Creative Destruction）","パレートの法則","パーキンソンの法則"],answer:1,exp:"創造的破壊（Creative Destruction）。経済学者シュンペーターが提唱した概念。"},
+{unit:1,type:"mc",q:"「創造的破壊」を提唱した経済学者は誰か。",opts:["ケインズ","シュンペーター","アダム・スミス","ドラッカー"],answer:1,exp:"創造的破壊はシュンペーターが提唱。頻出の対応関係。"},
+{unit:1,type:"mc",q:"「音楽CD・映画DVD」が「サブスク配信サービス」に置き換わったことで破壊された産業はどれか。",opts:["教育産業","コンテンツ産業","メディア産業","広告産業"],answer:1,exp:"音楽CD・映画DVD→サブスク配信は「コンテンツ産業の破壊」。教育＝百科事典→Google/ChatGPT、メディア＝TV・新聞→映像配信、広告＝マス広告→ネット広告。"},
+{unit:1,type:"mc",q:"「百科事典・教科書」が「Google・ChatGPT」に置き換わったことで破壊された産業はどれか。",opts:["教育産業","コンテンツ産業","メディア産業","金融産業"],answer:0,exp:"百科事典・教科書→Google・ChatGPTは「教育産業の破壊」。"},
+{unit:1,type:"mc",q:"「従来の改革」と「DXによる変革」の違いとして正しいものはどれか。",opts:["従来の改革は新しい提供価値、DXは連続的な改善","従来の改革は連続的な改善（提供価値は不変）、DXは非連続な新しい提供価値","両者に本質的な違いはない","DXは提供価値を変えない点が特徴である"],answer:1,exp:"従来の改革＝提供価値は変わらない連続的な改善。DX＝新しい提供価値をつくる非連続な変革。"},
+{unit:1,type:"mc",q:"日本のDXの現状について、世界デジタル競争力ランキングを発表している機関はどこか。",opts:["OECD","IMD（国際経営開発研究所）","世界銀行","IMF"],answer:1,exp:"スイスのIMD（国際経営開発研究所）が世界デジタル競争力ランキングを発表。2025年は67か国中30位。"},
+{unit:1,type:"mc",q:"世界で最初にDXを提唱し、DXを「企業」「行政」「社会」に細分化した（2022年）とされる人物は誰か。",opts:["エリック・ストルターマン教授","クレイトン・クリステンセン","フィリップ・コトラー","マイケル・ポーター"],answer:0,exp:"エリック（ストルターマン）教授のDXの領域規定（2022年）で、DXを企業・行政・社会に細分化した。"},
+{unit:1,type:"mc",q:"企業のDXを組織構造から3つに整理した際、営業・マーケティング部門が担う領域はどれか。",opts:["サプライチェーンDX","基幹業務DX","マーケティングDX","防災DX"],answer:2,exp:"営業・マーケ部門＝マーケティングDX、研究開発・製造・品質管理部門＝サプライチェーンDX、管理部門＝基幹業務DX。"},
+{unit:1,type:"mc",q:"本授業が掲げる3つの方針に含まれないものはどれか。",opts:["実用性","先進性","関連性","経済性"],answer:3,exp:"3つの方針は「実用性・先進性・関連性」。経済性は含まれない。"},
+{unit:1,type:"desc",q:"DXの影響を分析する際に用いられる「4つの視点」について説明しなさい。",model:"DXの影響は『ユーザー目線』と『事業者目線』の2つの立場それぞれについて、『失われたこと』と『良くなったこと』の2軸で分解し、計4つの視点で捉える。例：サブスク配信では、ユーザーはアナログの音質・質感を失う一方で多くの音楽・デバイスフリー・未知の音楽との出会い・コスパを得て、事業者は店舗型ビジネスを失う一方で新規参入障壁の低下・収益基盤の安定性を得た。"},
+{unit:1,type:"desc",q:"エリック教授によるDXの領域規定における「企業のDX」と「社会のDX」の違いを説明しなさい。",model:"企業のDXには変革を推進する仕掛け人（主体）が存在するのに対し、社会のDXは企業DXのような明確な仕掛け人が不在で、社会環境全体が変化していく点に違いがある。DXの領域は働き方・防災・教育・産業などにまたがり非常に広い。"},
+
+/* ===================== 第2単元 マーケティングDXの全体像（4択10・記述2） ===================== */
+{unit:2,type:"mc",q:"英経済誌The Economistが「世界で最も貴重な資源はもはや石油ではない」と表現したことに関連して、21世紀最大の資源とされるものはどれか。",opts:["石炭","データ","希少金属","人材"],answer:1,exp:"The Economist「The world's most valuable resource」。データは21世紀最大の資源とされる。"},
+{unit:2,type:"mc",q:"マーケティングDXを生んだ「3つの環境変化」に含まれないものはどれか。",opts:["顧客接点のデジタル化","生成AIによる言語の情報爆発","データの重要性の高まり","少子高齢化による人口減少"],answer:3,exp:"3つの環境変化は①顧客接点のデジタル化②生成AIによる言語の情報爆発③データの重要性の高まり。人口減少は含まれない。"},
+{unit:2,type:"mc",q:"授業における「マーケティングDX」の定義として最も適切なものはどれか。",opts:["広告費を削減すること","生活者の『日常』の変化に企業が対応すること","SNSアカウントを開設すること","自社ECサイトを立ち上げること"],answer:1,exp:"マーケティングDX＝生活者の「日常」の変化に企業が対応すること。顧客と企業の接点の変革。"},
+{unit:2,type:"mc",q:"Uber Eats、Instagram、PayPayなどが象徴する環境変化はどれか。",opts:["顧客接点のデジタル化","生成AIによる情報爆発","データの重要性の高まり","サプライチェーンの複雑化"],answer:0,exp:"出前がアプリに、情報発信・受信が顧客主体に、決済がスマホ一台に＝顧客接点のデジタル化。"},
+{unit:2,type:"mc",q:"マーケティングDXにおいて特に強調される、最も注意すべき考え方はどれか。",opts:["最新技術をとにかく多く導入する","手段が目的化してはいけない（生活者視点で考える）","競合と同じ施策を必ず行う","コストを最優先にする"],answer:1,exp:"「生活者の視点で考えること」が最重要で、手段が目的化してはいけない。本当に意味ある取り組みかを考える。"},
+{unit:2,type:"mc",q:"顧客と企業の接点を因数分解した基本の3フェーズの順序として正しいものはどれか。",opts:["体験→認知→継続","認知→体験→継続","継続→認知→体験","認知→継続→体験"],answer:1,exp:"認知（はじめまして）→体験（使ってみる）→継続（使い続ける）の順。"},
+{unit:2,type:"mc",q:"「顧客が商品・サービスを認知し、検討・購入・利用・再購入に至るまでの一連の行動や思考のプロセスを時系列で可視化したもの」を何と呼ぶか。",opts:["バリューチェーン","カスタマージャーニー","ファネル分析","SWOT分析"],answer:1,exp:"カスタマージャーニー。正解があるものではなく書き方に多様なパターンがある。"},
+{unit:2,type:"mc",q:"カスタマージャーニーが担保する2つの役割として正しい組み合わせはどれか。",opts:["低コストと高速化","ターゲット目線と網羅性","独創性と話題性","価格と品質"],answer:1,exp:"カスタマージャーニーは『ターゲット目線』×『網羅性』を担保する。目線がないと独りよがりに、網羅性がないと単なる面白いアイデアで終わる。"},
+{unit:2,type:"mc",q:"AI時代のカスタマージャーニーにおける顧客接点の構造として説明されているものはどれか。",opts:["人間×企業の二者構造","人間×AIエージェント×企業のAIの三者構造","企業×企業の二者構造","AI単独の一者構造"],answer:1,exp:"顧客接点は「人間×企業」から「人間×AIエージェント×企業のAI」の三者構造へ。人間の動線とAIの動線の2レイヤーで描く。"},
+{unit:2,type:"mc",q:"AI時代におけるマーケターの役割の変化として最も適切なものはどれか。",opts:["作業する人からAIを指揮する人へ","AIを指揮する人から作業する人へ","マーケター自体が不要になる","データ入力専任者になる"],answer:0,exp:"マーケターは「作業する人」から「AIを指揮する人」へ。人間には問いを立てる力・違和感を見つける力・共感する力が残る。"},
+{unit:2,type:"desc",q:"マーケティングDXを生んだ「3つの環境変化」を挙げ、それぞれ簡潔に説明しなさい。",model:"①顧客接点のデジタル化：Uber Eats・Instagram・PayPayなど日常行動の多くがデジタル化し、可処分時間に占めるデジタル活動の割合が増加した。②生成AIによる言語の情報爆発：ChatGPT等により、これまで人間が数時間かけた作業が数秒で安定した品質で終わるようになった。③データの重要性の高まり：行動ログ・GPS位置情報・IoT機器データが蓄積し、データを新しい資産として有効活用することが重要になった。"},
+{unit:2,type:"desc",q:"AI時代においてマーケティングの仕事の仕方（マーケターの役割）がどのように変化すると説明されているか述べなさい。",model:"タスクの実行はAIが担い、マーケターは「作業する人」から「AIを指揮する人」へと変化する。顧客調査・クリエイティブ制作・広告運用・レポーティング・戦略立案の叩き台などをAIが行い、人間は方向づけ・判断・顧客への深い理解に集中する。人間に残るのは『問いを立てる力』『違和感を見つける力』『顧客に共感する力』である。"},
+
+/* ===================== 第3単元 最新技術（4択18・記述2） ===================== */
+{unit:3,type:"mc",q:"DXに活用できる最新技術は3つのカテゴリに分類される。その組み合わせとして正しいものはどれか。",opts:["インフラ技術・アプリケーション技術・エクスペリエンス技術","ハード技術・ソフト技術・通信技術","基盤技術・応用技術・周辺技術","入力技術・処理技術・出力技術"],answer:0,exp:"インフラ技術／アプリケーション技術／エクスペリエンス技術の3カテゴリ・12種類に整理される。"},
+{unit:3,type:"mc",q:"「インターネット経由でサーバー・ストレージ・ソフトウェアを利用でき、自社でハードを保有しなくてよい仕組み」を何と呼ぶか。",opts:["オンプレミス","クラウドコンピューティング","メインフレーム","グリッドコンピューティング"],answer:1,exp:"クラウドコンピューティング。代表例はAWS・Microsoft Azure・Google Cloud。"},
+{unit:3,type:"mc",q:"AWSが提供する仮想サーバーのサービス名はどれか。",opts:["S3","EC2","Lambda","Tableau"],answer:1,exp:"EC2は仮想サーバー（大規模PCをクラウドに作るイメージ）。S3は仮想ストレージ。"},
+{unit:3,type:"mc",q:"大規模データ（億レコード級）を統合し、横断的に関数処理・分析するためのツールを何と呼ぶか。",opts:["CRM","DMP（Data Management Platform）","RPA","CMS"],answer:1,exp:"DMP（Data Management Platform）。エクセルのタブを増やして一つのファイルにするイメージで、統合により横断処理が可能に。"},
+{unit:3,type:"mc",q:"「アプリとアプリを繋げる仕組み全般」を指す用語はどれか。",opts:["API","OS","URL","CPU"],answer:0,exp:"API。DMPで分析した結果を外部ツール（Tableau等）に引き渡す際にも使われる。"},
+{unit:3,type:"mc",q:"5G（第5世代移動通信システム）の特徴として正しいものはどれか。",opts:["低容量・低速・高遅延","大容量・高速・低遅延","小容量・高速・高遅延","大容量・低速・低遅延"],answer:1,exp:"5Gは大容量・高速・低遅延。自動運転などの活用基盤として期待される。"},
+{unit:3,type:"mc",q:"電気ではなく『光』を中心とした情報技術で高速・低遅延・大容量・省電力を実現するNTTの構想はどれか。",opts:["5G","IOWN","IoT","Wi-Fi6"],answer:1,exp:"IOWN（Innovative Optical and Wireless Network）構想。データセンターの処理を電気から光に置き換える。"},
+{unit:3,type:"mc",q:"「様々なモノがインターネットにつながり、状況把握や遠隔操作を高い自由度で実現する技術」はどれか。",opts:["IoT","DMP","RPA","NFT"],answer:0,exp:"IoT（モノのインターネット）。養鶏・農業のモニタリング自動化などに活用。"},
+{unit:3,type:"mc",q:"Google DeepMindが提案したAGIの5レベルのうち、レベル3の名称はどれか。",opts:["Emerging AGI","Competent AGI","Expert AGI","Virtuoso AGI"],answer:2,exp:"Lv1 Emerging／Lv2 Competent／Lv3 Expert／Lv4 Virtuoso／Lv5 ASI。生成AIは10年以内にレベル3到達とも言われる。"},
+{unit:3,type:"mc",q:"AGIの5レベルにおける最上位（レベル5）のASIの正式名称はどれか。",opts:["Advanced Systems Integration","Artificial Superintelligence","Automated Service Interface","Augmented Smart Intelligence"],answer:1,exp:"ASI＝Artificial Superintelligence（人工超知能）。100%人間より優れているレベル。"},
+{unit:3,type:"mc",q:"「人間のみが対応可能とされていた作業を、ルールエンジンやAI・機械学習等の認知技術で代行・代替する取り組み」を何と呼ぶか。",opts:["RPA（Robotic Process Automation）","DMP","ERP","SEO"],answer:0,exp:"RPA（Robotic Process Automation）。Google App Script（GAS）などで無料で始められる。"},
+{unit:3,type:"mc",q:"「インターネット上に構築された3D仮想空間で、アバターを通じて交流・活動・経済行動を行えるデジタル世界」はどれか。",opts:["メタバース","NFT","クラウド","ブロックチェーン"],answer:0,exp:"メタバース。バーチャルショッピング（没入感・異日常・表現力・差別化）などに活用される。"},
+{unit:3,type:"mc",q:"GAFAに代表される、世界規模で情報・通信・流通・広告を支配し独自エコシステムを持つ存在を何と呼ぶか。",opts:["メガプラットフォーム","スタートアップ","ユニコーン","SIer"],answer:0,exp:"メガプラットフォーム。クレジットカード1枚で誰でも広告出稿ができる。"},
+{unit:3,type:"mc",q:"動画配信サービスのビジネスモデルのうち、広告型・無料のモデルを指す略称はどれか。",opts:["SVOD","AVOD","TVOD","PVOD"],answer:1,exp:"AVOD＝広告型・無料の映像サービス。SVOD＝サブスク型・有料。"},
+{unit:3,type:"mc",q:"「ブランドが消費者へ直接商品を販売するビジネスモデル」を何と呼ぶか。",opts:["B2B","D2C（Direct to Consumer）","OEM","BPO"],answer:1,exp:"D2C（Direct to Consumer）。自社ECを活用しブランド独自の世界観・顧客体験を重視する。"},
+{unit:3,type:"mc",q:"CRMで重要とされる「パレートの法則（2:8の法則）」の内容として正しいものはどれか。",opts:["上位20%の顧客が売上の80%を占める","新規顧客のコストは既存の5倍","顧客離れを5%改善すると利益が25%改善","上位80%の顧客が売上の20%を占める"],answer:0,exp:"2:8（パレート）＝上位20%の顧客が売上の80%を占める。1:5＝新規は既存の5倍コスト、5:25＝離反5%改善で利益25%改善。"},
+{unit:3,type:"mc",q:"「顧客離れを5%改善すれば利益が25%改善される」という法則はどれか。",opts:["1:5の法則","2:8の法則","5:25の法則","80:20の法則"],answer:2,exp:"5:25の法則。既存顧客の維持・囲い込みの重要性を示す。"},
+{unit:3,type:"mc",q:"CRMにおける「1:5の法則」の内容として正しいものはどれか。",opts:["既存顧客への販売コストは新規の5倍","新規顧客への販売コストは既存顧客の5倍","売上上位1%が全体の5%を占める","5人に1人がリピーターになる"],answer:1,exp:"1:5の法則＝新規顧客に販売するコストは既存顧客に販売するコストの5倍かかる。"},
+{unit:3,type:"desc",q:"DMP（Data Management Platform）とは何か、その仕組みをエクセルに例えて説明しなさい。",model:"DMPは、個人PCでは解析できない億レコード級の大規模データを統合し、横断的に分析・活用するためのツール。エクセルのタブを追加して一つのファイルにまとめると、同じファイル内のデータを横断してsumやaverage等で関数処理できるのと同じように、DMPも会員情報・購買情報・キャンペーン参加・WEBログ・アプリログなど複数のデータソースをキーIDで統合（vlookupのイメージ）し、横断的に集計・分析できる。分析結果はAPIで外部ツール（Tableau等）へ引き渡すことも可能。"},
+{unit:3,type:"desc",q:"CRMで重要とされる3つの法則（2:8の法則・1:5の法則・5:25の法則）をそれぞれ説明しなさい。",model:"2:8の法則（パレートの法則）：全体の上位20%の顧客が売上の80%を占める。1:5の法則：新規顧客に販売するコストは既存顧客に販売するコストの5倍かかる。5:25の法則：顧客離れを5%改善すれば利益が25%改善される。これらから、同じコストをかけるなら少数の既存顧客の維持・再販売に費やす方が利益が向上し、アップセル・クロスセル・ロイヤリティマーケティングが重要となる。"},
+
+/* ===================== 第4単元 DXを阻む要因（4択11・記述2） ===================== */
+{unit:4,type:"mc",q:"IMD世界デジタル競争力ランキングにおける日本の状況の説明として正しいものはどれか。",opts:["インフラも人材も世界最下位クラス","インフラは整備されているが人材・法規制・VC・意思決定に課題","すべての指標で世界トップクラス","インフラは弱いが人材は世界一"],answer:1,exp:"インターネット普及率・IT導入等インフラは整備されているが、グローバル人材不足・法規制の出遅れ・VCの弱さ・意思決定の遅さが課題。"},
+{unit:4,type:"mc",q:"「2000年以降に設立された、企業評価額10億ドル以上の未上場企業」を何と呼ぶか。",opts:["ユニコーン企業","ガゼル企業","メガベンチャー","スタートアップ"],answer:0,exp:"ユニコーン企業。日本は9社と圧倒的に少ない（米国703社・中国340社）。"},
+{unit:4,type:"mc",q:"日本の労働生産性について、米国を100とした場合の日本のおおよその水準はどれか。",opts:["約58（6割未満）","約80","約95","約120"],answer:0,exp:"米国100に対し日本は58.1で6割未満。主要国の中でも最下位クラス。"},
+{unit:4,type:"mc",q:"日本の労働生産性が低い要因の分類として、授業で挙げられていないものはどれか。",opts:["文化的な要因","システム的な要因","環境的な要因","地理的な要因"],answer:3,exp:"文化的要因（完璧主義な袋叩き文化・縦割り）・システム的要因（変わらない法規制・デジタル基盤の遅れ）・環境的要因（高齢化・非正規増）の3つ。"},
+{unit:4,type:"mc",q:"「政策の企画をその場限りのエピソードに頼らず、合理的根拠（エビデンス）に基づくものとすること」を表す用語はどれか。",opts:["EBPM","KPI","PDCA","CSR"],answer:0,exp:"EBPM（Evidence-Based Policy Making＝証拠に基づく政策立案）。"},
+{unit:4,type:"mc",q:"EBPMで用いられる統計手法「RDD」の正式名称・内容はどれか。",opts:["傾向スコアマッチング＋差分の差分法","回帰不連続デザイン","逆確率重みづけ法","主成分分析"],answer:1,exp:"RDD＝回帰不連続デザイン。ある閾値の前後でサンプルが同質と仮定し、閾値前後の差で介入効果を推定。"},
+{unit:4,type:"mc",q:"「傾向スコアマッチング＋差分の差分法」を組み合わせたEBPMの統計手法はどれか。",opts:["PSM-DID","IPW-DID","RDD","OLS"],answer:0,exp:"PSM-DID（傾向スコアマッチング＋差分の差分法）。IPW-DIDは傾向スコア逆確率重みづけ＋差分の差分法。"},
+{unit:4,type:"mc",q:"「駐輪場の屋根の色のような些末な議題ほど意見が出て、原発建設の是非のような重要議題は意見が出にくい」という現象を表す法則はどれか。",opts:["パレートの法則","パーキンソンの法則","マーフィーの法則","メトカーフの法則"],answer:1,exp:"パーキンソンの法則。大事な議論と意見が出やすい議論は違うことに注意が必要。"},
+{unit:4,type:"mc",q:"労働生産性を高める「無形資産」の例として最も適切なものはどれか。",opts:["工場の機械","ノウハウ・ブランド・商品のファン","現金","土地"],answer:1,exp:"無形資産＝ノウハウ・ブランド・商品のファンなど。これがないと1の労働力で1しか生み出せない。日本は無形資産の後進国でもある。"},
+{unit:4,type:"mc",q:"DX実務における「仕事の生まれ方」の3類型に含まれないものはどれか。",opts:["自主提案型","コンペ型","デリバリー型","ボランティア型"],answer:3,exp:"自主提案型・コンペ型・デリバリー型の3類型。"},
+{unit:4,type:"mc",q:"提案資料における「キースライド」の説明として最も適切なものはどれか。",opts:["最も文字数が多いスライド","このページさえ読めば大枠が伝わる、論点の網羅性とメッセージ性を両取りした1枚","表紙のスライド","参考文献のスライド"],answer:1,exp:"キースライドは、このページさえ読んでもらえれば大枠が伝わる1枚。論点の網羅性とメッセージ性を両取りし、事実の列挙でなくメッセージに仕立てる。"},
+{unit:4,type:"desc",q:"日本がデジタル競争力ランキングで低位である一方、インフラは整備されているとされる。日本のDXを阻む具体的な課題を3つ以上挙げなさい。",model:"インターネット・モバイル普及率やIT導入・クラウド活用などインフラは世界トップクラスに整備されている一方、①グローバル人材（ドローンやフィンテック等の先端領域人材）の不足、②先端技術領域での法規制の出遅れ、③ベンチャーキャピタルの弱さ、④意思決定スピードの遅さ、が課題。結果として『ヒト・モノ・カネ』の最適配置がうまくいっていない。文化的（袋叩き文化・縦割り）・システム的（変わらない法規制）・環境的（高齢化・非正規増）要因も背景にある。"},
+{unit:4,type:"desc",q:"個人・企業レベルで労働生産性を高める方法として挙げられた「選択と集中」について説明しなさい。",model:"あれもこれもと欲張って全部の平均を取ると、小さなベクトルにしかならない。同じ方向にみんなで進み高め合うことに集中する。多様性のあるチームは大事だが、大前提としてバイブス（価値観）の合うチーム構成が重要。また、大事な議論と意見が出やすい議論は異なる（パーキンソンの法則）ため、本当に大事な議論かどうかを見極めて進めることが必要である。"},
+
+/* ===================== 第5単元 認知領域（4択10・記述2） ===================== */
+{unit:5,type:"mc",q:"マーケティングDXの領域を整理した「❶認知 ❷体験 ❸継続」に加えて挙げられる第4の領域はどれか。",opts:["戦略支援","財務管理","人事評価","品質管理"],answer:0,exp:"❶認知 ❷体験 ❸継続 ❹戦略支援の4領域で整理される。"},
+{unit:5,type:"mc",q:"ルンバのサブスクが生み出した新しい体験価値として最も適切なものはどれか。",opts:["最高性能の掃除機を持てる","『悩まなくて良い』という体験（買って失敗する不安の解消）","最安値で購入できる","自分で組み立てられる"],answer:1,exp:"高額なロボット掃除機の購入課題（失敗の不安）に対し、月額でお試しでき『悩まなくて良い』という新しい体験価値を生んだ。"},
+{unit:5,type:"mc",q:"TVCMで主に使われる、視聴率の総和を表す指標はどれか。",opts:["CPA","GRP","ROAS","CTR"],answer:1,exp:"GRP（視聴率の総和）。かつて認知獲得の主な変数はクリエイティブと物量だった。"},
+{unit:5,type:"mc",q:"Googleの自動最適化広告手法で、検索・YouTube・Gmail・ディスプレイ・マップなど複数枠を横断配信し機械学習で成果最大化するものはどれか。",opts:["p-max","DOOH","GRP","SVOD"],answer:0,exp:"p-max。素材（テキスト・画像・動画）とオーディエンスシグナル、最適化手法を入力すると自動最適化される。"},
+{unit:5,type:"mc",q:"「街中や交通機関などの公共空間に設置されたデジタルサイネージを使った広告」を何と呼ぶか。",opts:["DOOH（Digital Out Of Home）","SVOD","DMP","OMO"],answer:0,exp:"DOOH（Digital Out Of Home）＝デジタル屋外広告。パブの混み具合に応じた配信など自由度が高い。"},
+{unit:5,type:"mc",q:"味の素「鍋キューブ」が気温低下時に広告を配信した事例が示す広告手法はどれか。",opts:["リアルタイムデータ連動広告","コンテンツマーケティング","アフィリエイト広告","マス広告"],answer:0,exp:"リアルタイムデータ連動広告。気温・天候・SNS投稿量などに合わせて出稿タイミング・量を制御する。"},
+{unit:5,type:"mc",q:"「広告ではなく、顧客にとって価値ある情報（コンテンツ）を提供して信頼関係を築き、購買やロイヤルティにつなげる手法」はどれか。",opts:["コンテンツマーケティング","ターゲティング広告","DOOH","ライブコマース"],answer:0,exp:"コンテンツマーケティング。よなよなエール「よなよなの里」などが例。"},
+{unit:5,type:"mc",q:"2026年以降のマーケティングで、最適化に加えて重要になると説明されているものはどれか。",opts:["いくつ起爆的なコミュニティ施策を積み上げられるか","いかに広告費を削減するか","いかにテレビCMだけに集中するか","いかに単発の花火を打つか"],answer:0,exp:"生活者の認知の閾値が上がる中、最適化に加え『起爆的なコミュニティ施策の積み上げ（起爆数）』が問われ、再び物量の時代へ。"},
+{unit:5,type:"mc",q:"TV×YouTubeの最適予算配分を求める基本モデルで使われる3つのデータに含まれないものはどれか。",opts:["リーチカーブ","態度変容確率パラメータ（転換率）","重複係数","為替レート"],answer:3,exp:"リーチカーブ・態度変容確率パラメータ（転換率）・重複係数の3つ。統合リーチを最大化する予算比率を探す。"},
+{unit:5,type:"mc",q:"投下コストとリーチの関係を近似曲線で係数化する際に用いられる代表的な手法はどれか。",opts:["最小二乗法","主成分分析","クラスター分析","線形計画法のみ"],answer:0,exp:"関数フィッティング（適切な近似関数の選定・最小二乗法）が必要スキルとして挙げられている。"},
+{unit:5,type:"desc",q:"認知領域のマーケティングにおいて、認知獲得の考え方が時代とともにどう変化してきたか説明しなさい。",model:"かつては、商品の認知を取るための主な変数は『クリエイティブ』と『物量』であった（TVCMのGRP＝視聴率の総和で大量に認知を取る）。しかし2000年代以降、生活者の行動が多様化し、一発の打ち上げ花火での成功はほぼ不可能となったため、これらに加えて『最適化』（届けるべき人にいかに届けるか）が重要になった。さらに2026年以降は、最適化に加えて『起爆的なコミュニティ施策をいくつ積み上げられるか』という起爆数（再び物量）が問われるようになっている。"},
+{unit:5,type:"desc",q:"TVとYouTubeの最適な予算配分を求める際に用いる3つのデータ（リーチカーブ・転換率・重複係数）の役割を説明しなさい。",model:"リーチカーブ：いくら投下したらどのくらいのリーチが取れるかを表す（近似曲線で係数化）。態度変容確率パラメータ（転換率）：媒体に接触することでどのくらいの態度変容（広告認知）が起きるか。重複係数（α）：複数媒体のリーチがどのくらい重複するか。これらを用いて統合リーチ（TVのみ＋YouTubeのみ＋重複部分）を算出し、予算制約（例：5億円以内）の中で統合リーチが最大となるTVとYouTubeの予算比率を求める。"},
+
+/* ===================== 第6単元 体験領域（4択13・記述2） ===================== */
+{unit:6,type:"mc",q:"「オンラインとオフラインの垣根をなくし、顧客体験を一体化させる考え方」を何と呼ぶか。",opts:["OMO（Online Merges with Offline）","O2O","B2B","D2C"],answer:0,exp:"OMO（Online Merges with Offline）。ユニクロが実店舗とEC在庫をリアルタイム連動させた例が代表。"},
+{unit:6,type:"mc",q:"「電波を使ってICタグを非接触で読み取る技術（バーコードの進化）」で、ユニクロの無人レジに使われているものはどれか。",opts:["QRコード","RFID","NFC決済","OCR"],answer:1,exp:"RFID（Radio Frequency Identification）。商品を専用トレイに置くだけで一括読み取りが可能になる。"},
+{unit:6,type:"mc",q:"「ライブ配信で商品を紹介し、その場で視聴者が購入できる販売手法」を何と呼ぶか。",opts:["ライブコマース","リテールメディア","サブスクリプション","アフィリエイト"],answer:0,exp:"ライブコマース（TV通販＋SNS＋ECの融合）。中国のTaobao Liveが代表例。"},
+{unit:6,type:"mc",q:"楽天IDを軸に市場・カード・銀行・モバイル等を連携させ、囲い込みでLTV最大化を狙う戦略を何と呼ぶか。",opts:["経済圏構築","OMO","リテールメディア","D2C"],answer:0,exp:"経済圏構築（楽天経済圏）。複数サービスを使うほど還元率が上がり囲い込み効果が高まる。※ポイントは使わせることが大事。"},
+{unit:6,type:"mc",q:"「小売企業が自社の購買データや顧客接点を活用して広告枠・販促機会を提供するメディアビジネス」はどれか。",opts:["リテールメディア","オウンドメディア","アーンドメディア","マスメディア"],answer:0,exp:"リテールメディア。トライアルのタブレットカート（買い物カートにタブレットを搭載）が例。"},
+{unit:6,type:"mc",q:"Amazonのレコメンドエンジンで中心的に採用されているアルゴリズムはどれか。",opts:["協調フィルタリング","線形回帰","決定木のみ","形態素解析"],answer:0,exp:"協調フィルタリングを中心とした多層的なアルゴリズム。「よく一緒に購入されている商品」などを提示。"},
+{unit:6,type:"mc",q:"従来のRFM分析に新たに加えられた、行動密度（連続購買か定期購買か）を表す指標はどれか。",opts:["Clumpiness（クランピネス）","Recency","Frequency","Monetary"],answer:0,exp:"クランピネス（Clumpiness）を加えたRFMCという考え方。訪問日に偏りがあるユーザーで高い数字が出る。"},
+{unit:6,type:"mc",q:"「企業や個人が所有・運営し発信するメディア（自社サイト・SNSなど）」を何と呼ぶか。",opts:["オウンドメディア","アーンドメディア","ペイドメディア","マスメディア"],answer:0,exp:"オウンドメディア。Red Bullのブランド発信などが例。"},
+{unit:6,type:"mc",q:"「第三者によって自発的に発信されるメディア露出で、企業のコントロールが及ばない分、信頼性・影響力が高い」ものはどれか。",opts:["アーンドメディア","オウンドメディア","ペイドメディア","リテールメディア"],answer:0,exp:"アーンドメディア。アフィリエイト広告や口コミなどが該当する。"},
+{unit:6,type:"mc",q:"DXコンセプト設計における「よくある失敗」として指摘されているものはどれか。",opts:["DXの概要や手順を順当に説明するだけで仮説がない","仮説を盛り込みすぎる","事例を紹介しすぎる","デザインに凝りすぎる"],answer:0,exp:"DXの概要・手順を説明するだけ（＝仮説がない）は研究発表に近くなり後味が残らない。大事なのは新しい着眼点＝仮説。"},
+{unit:6,type:"mc",q:"DXコンセプトの作り方（デザイン思考に近い）で基本とされる発想法はどれか。",opts:["掛け算（従来サービス×○○）","割り算","引き算のみ","反復のみ"],answer:0,exp:"アイデアは基本『掛け算』で考える。従来のサービス×「○○」の組み合わせで面白くする。普通の体験をちょっとずらす。"},
+{unit:6,type:"mc",q:"ウォルト・ディズニーが新しいアイデアを作る過程で分けた思考の3段階に含まれないものはどれか。",opts:["空想家","現実主義者","批評家","記録係"],answer:3,exp:"①空想家②現実主義者③批評家の3段階。まずは空想家の視点で右脳的に発想を膨らませる。"},
+{unit:6,type:"mc",q:"建物内（商業施設・空港など）の位置情報を可視化・デジタル化して屋内ナビや分析に活用する技術はどれか。",opts:["インドアマッピング","GPS測位","DOOH","OMO"],answer:0,exp:"インドアマッピング。Oriientはスマホの磁場センサーで高精度な屋内測位を実現（Wi-Fiやビーコン不要）。"},
+{unit:6,type:"desc",q:"従来のRFM分析と、それに新たな指標を加えたRFMCの違いを説明しなさい。",model:"RFM分析は、Recency（最新購入日の新しさ）・Frequency（購入頻度）・Monetary（購入金額）の3軸で顧客を分類し、優良顧客や休眠顧客を可視化する手法。RFMCはこれにClumpiness（クランピネス＝行動密度）を加えたもので、『定期的に購買する人』か『極端に連続して購買する人（衝動買い）』かを指標化する。訪問日に偏りがあるユーザーほど高い数字が出る指標で、より精緻な顧客理解を可能にする。"},
+{unit:6,type:"desc",q:"DXコンセプト設計において『仮説』が重要とされる理由を、よくある失敗と対比して説明しなさい。",model:"よくある失敗は、DXの概要や手順を順当に説明するだけで仮説がなく、ビジネスというより研究発表に近い、後味の残らないプレゼンになることである。これを避けるために重要なのが『仮説』であり、現時点で正しいか分からなくとも新しい着眼点を織り交ぜることが大切。例えば商店街DXなら『日本式のワールドバザール』、スポーツDXなら『プレイヤーが絶対君主の練習体験』のように、正しく定量化できなくても皆がイメージできる言語化を行うことで、発想が広がり、既視感のあるサービスから取り組む意義のあるサービスへと磨き上がる。"},
+
+/* ===================== 第7単元 継続領域・フレームワーク（4択13・記述2） ===================== */
+{unit:7,type:"mc",q:"「企業がコントロールできないマクロ外部環境を、政治・経済・社会・技術の4つで分析するフレームワーク」はどれか。",opts:["PEST分析","3C分析","RFM分析","SWOT分析"],answer:0,exp:"PEST分析。Political（政治・法）／Economical（経済）／Social（社会・文化）／Technological（技術）。"},
+{unit:7,type:"mc",q:"3C分析で分析する3つの対象の正しい組み合わせはどれか。",opts:["Customer・Company・Competitor","Cost・Channel・Communication","Content・Context・Connection","Culture・Capital・Capability"],answer:0,exp:"3C＝Customer（顧客）・Company（自社）・Competitor（競合）。"},
+{unit:7,type:"mc",q:"9segs（9セグメント分析）を提唱した人物は誰か。",opts:["西口一希","村上徹","フィリップ・コトラー","シュンペーター"],answer:0,exp:"9segsは西口一希氏（Strategy Partners代表）が提唱。購入ファネルと心理ファネル（次回購買意向）の両軸で9セグメントに数値化。"},
+{unit:7,type:"mc",q:"「消費者の購買プロセスを漏斗の形で図式化し、購買以降のリピート・ロイヤル化まで表す」ものを何と呼ぶか。",opts:["デュアルファネル（ダブルファネル）","カスタマージャーニー","バリューチェーン","PESTモデル"],answer:0,exp:"従来のファネルに対し、購買以降まで表すデュアルファネル（ダブルファネル）が一般化している。"},
+{unit:7,type:"mc",q:"「顧客が生涯にわたって企業にもたらす価値」を表す指標はどれか。",opts:["LTV（顧客生涯価値）","ROI","GRP","CPA"],answer:0,exp:"LTV（Life Time Value＝顧客生涯価値）。“売って終了”ではなく継続的接点でLTVを高める。"},
+{unit:7,type:"mc",q:"「LINEやWeChatなどのプラットフォーム内で起動でき、インストール不要でサービスを提供できる軽量アプリ」はどれか。",opts:["ミニアプリ","ネイティブアプリ","PWA","SaaS"],answer:0,exp:"ミニアプリ。飲食店向けの「ダイニー」がLINEミニアプリ上で展開する例。"},
+{unit:7,type:"mc",q:"「ファンとの関係を深め、共感や熱量を軸に継続的な購買や拡散を促すマーケティング手法」はどれか。",opts:["ファンマーケティング","マスマーケティング","ダイレクトメール","テレマーケティング"],answer:0,exp:"ファンマーケティング。USJや、株式投資型クラファン『Equity for Punks』を行うBrewDogが例。"},
+{unit:7,type:"mc",q:"Googleが提唱した「課題発見からプロトタイプ作成・ユーザーテストまでを短期間で行う問題解決型のデザイン手法」はどれか。",opts:["Design Sprint","アジャイル","ウォーターフォール","カンバン"],answer:0,exp:"Design Sprint。Understand→Sketch→Decide→Prototype→Researchで進め、「How might we?」を使う。"},
+{unit:7,type:"mc",q:"LTV予測で最も一般的とされる「Pareto/NBDモデル」で用いられる統計モデルはどれか。",opts:["階層ベイズモデル","単回帰モデル","決定木","k-means"],answer:0,exp:"顧客のRFM情報から階層ベイズモデルを構築し、λ・μ・ηのパラメータを求める。"},
+{unit:7,type:"mc",q:"Pareto/NBDモデルにおいて、顧客の単位期間あたりの購入回数の期待値（λ）が従う分布はどれか。",opts:["ポアソン分布","指数分布","正規分布","一様分布"],answer:0,exp:"λ（購入回数）はカウントデータなのでポアソン分布。μ（非アクティブ化までの時間）は指数分布。"},
+{unit:7,type:"mc",q:"Pareto/NBDモデルにおいて、μ（顧客が非アクティブ化するまでの時間の期待値）が従う分布はどれか。",opts:["指数分布","ポアソン分布","二項分布","カイ二乗分布"],answer:0,exp:"μは時間に対する期待値なので指数分布。ηは1回あたり購入金額の期待値。"},
+{unit:7,type:"mc",q:"ECサイトで「会員登録でポイント付与」だけを目標に広告を打った結果生じた問題と、その改善の方向性として正しいものはどれか。",opts:["登録だけして利用しないユーザーが増えた／登録後の利用・継続（LTV）を目標にする","登録者が減った／登録数だけを追う","売上が増えすぎた／広告を止める","離脱が減った／変更不要"],answer:0,exp:"ポイントだけもらって使わないユーザーが大半に。事業成長には登録後の利用・継続利用（LTV）を目標にすべき。"},
+{unit:7,type:"mc",q:"RFM分析の3要素の正しい組み合わせはどれか。",opts:["Recency・Frequency・Monetary","Reach・Frequency・Media","Rate・Fee・Margin","Recency・Feedback・Motivation"],answer:0,exp:"RFM＝Recency（最終購入日）・Frequency（購入頻度）・Monetary（購入金額）。"},
+{unit:7,type:"desc",q:"LTV予測で最も一般的とされる「Pareto/NBDモデル」について、用いるデータと求める3つのパラメータ（λ・μ・η）を説明しなさい。",model:"Pareto/NBDモデルは、顧客のRFM情報（Recency＝計測最終日－購入最終日、Frequency＝購入回数、Monetary＝1回あたり購入金額）から階層ベイズモデルを構築し、以下の3つのパラメータを求める。λ（ラムダ）：顧客の単位期間あたりの購入回数の期待値で、カウントデータのためポアソン分布に従う。μ（ミュー）：顧客が非アクティブ化するまでの時間の期待値で、時間に対しては指数分布に従う。η（イータ）：顧客の1回あたりの購入金額の期待値。これらから顧客生存確率・期待購入回数・期待平均単価を推定し、LTVを算出する。"},
+{unit:7,type:"desc",q:"継続領域が重視される背景として、CRMにおける「既存顧客の維持」がなぜ利益向上につながるのか、関連する法則を用いて説明しなさい。",model:"従来のマーケティングは商品を買わせるまでがメインだったが、『売って終了』ではなく継続してもらう（リテンション）まで設計することで顧客生涯価値（LTV）が高まる。2:8の法則（上位20%の顧客が売上の80%を占める）、1:5の法則（新規顧客への販売コストは既存顧客の5倍）、5:25の法則（顧客離れを5%改善すれば利益が25%改善）から、同じマーケティングコストをかけるなら少数の既存顧客への再販売・維持に費やす方が利益は向上する。そのためアップセル・クロスセル・ロイヤリティマーケティングが重要となる。"},
+
+/* ===================== 第8単元 戦略領域・生成AI（4択11・記述2） ===================== */
+{unit:8,type:"mc",q:"授業における「戦略」の定義として最も適切なものはどれか。",opts:["目的を達成するために、限られた資源をどう配分し、どの道筋で勝ちにいくかを決める考え方・方針","とにかく多くの施策を同時に実行すること","競合の真似をすること","コストを最小化すること"],answer:0,exp:"戦略＝目的達成のための『選択と集中』の筋道。限られた資源の配分と勝ち筋を決める考え方・方針。"},
+{unit:8,type:"mc",q:"「データ」と「インテリジェンス」の違いとして正しいものはどれか。",opts:["データは情報そのもの、インテリジェンスは意思決定を賢くする示唆（頭脳）","データは示唆、インテリジェンスは生データ","両者は同じ意味","インテリジェンスは検索結果のこと"],answer:0,exp:"データ＝いわゆる情報。インテリジェンス＝人の意思決定を賢くする頭脳としての機能（示唆）。生成AIはデータに示唆を加える。"},
+{unit:8,type:"mc",q:"「投資に対してどれだけ利益を得られたか」を表す指標はどれか。",opts:["ROI","LTV","GRP","CPA"],answer:0,exp:"ROI＝得られた利益÷投資額。"},
+{unit:8,type:"mc",q:"「AパターンとBパターンを同時に小規模に実施し、市場投入前に顧客反応を実データで確認する手法」はどれか。",opts:["A/Bテスト","Causal Impact","RFM分析","PEST分析"],answer:0,exp:"A/Bテスト。事業戦略を複数同時に小規模実施して顧客反応を比較する。"},
+{unit:8,type:"mc",q:"Googleが開発したベイズモデルベースの手法で、施策がなかった場合の予測値（ベースライン）と実測値を比較して効果を可視化するものはどれか。",opts:["Causal Impact","A/Bテスト","p-max","RDD"],answer:0,exp:"Causal Impact。PythonやRで実装でき、施策の累積効果を可視化する。"},
+{unit:8,type:"mc",q:"生成AI活用がうまくいきやすいパターンとして挙げられた3つに含まれないものはどれか。",opts:["仕組み化","具体プロセス置換","大量処理","完全丸投げ"],answer:3,exp:"①仕組み化②具体プロセス置換③大量処理の3つ。丸投げは生成AIが苦手なこととして挙げられている。"},
+{unit:8,type:"mc",q:"「生成AI×エクセルなど、いくつかの機能を連動させて自動化させる」活用パターンはどれか。",opts:["仕組み化","具体プロセス置換","大量処理","丸投げ"],answer:0,exp:"仕組み化。ただ生成AIを使うのではなく、サービスを組み合わせて価値を作る。"},
+{unit:8,type:"mc",q:"「大量のSNSデータやYouTube字幕データから示唆を得る」活用パターンはどれか。",opts:["大量処理","仕組み化","具体プロセス置換","因果推論"],answer:0,exp:"大量処理。人間で処理できない膨大なインプットから解釈を得る。"},
+{unit:8,type:"mc",q:"生成AIが「苦手なこと」として挙げられているものはどれか。",opts:["情報の整理・要約","網羅的な羅列（ブレスト）","背景を考慮した仮説設計・因果推論","リサーチ（検索の延長）"],answer:2,exp:"苦手＝背景事情を考慮した仮説設計・意思決定に向けた情報収束・Will・丸投げ・因果推論・四則演算など。得意＝リサーチ・要約・網羅的羅列・情報の解釈。"},
+{unit:8,type:"mc",q:"実務レベルでの現状における人間と生成AIの関係として、授業で述べられているものはどれか。",opts:["人間 ≧ 生成AI（AIの出力は一般論の網羅版で、手慣れの人が使うと強い）","生成AI > 人間（すべて代替済み）","両者は完全に同等","人間は不要"],answer:0,exp:"実務レベルでは現状『人間 ≧ 生成AI』。AIの出力はよくある一般論の網羅版で、手慣れの人がAIを使うと強い段階。"},
+{unit:8,type:"mc",q:"戦略実務の全体の流れとして正しい順序はどれか。",opts:["事業環境分析→事業/マーケティング戦略策定→実行計画策定","実行計画策定→事業環境分析→戦略策定","戦略策定→実行計画策定→事業環境分析","事業環境分析→実行計画策定→戦略策定"],answer:0,exp:"事業環境分析→事業/マーケティング戦略策定→実行計画策定の順で網羅的に検証し一つの指針に落とす。"},
+{unit:8,type:"desc",q:"生成AI活用がうまくいきやすい3つのパターンを挙げ、それぞれ説明しなさい。",model:"①仕組み化：いくつかの機能を連動させて自動化する。ただ生成AIを使うのではなく、生成AI×エクセルのようにサービスを組み合わせて価値を作る。②具体プロセス置換：人間が行う具体的なプロセスを細分化し、その一部を生成AIに置き換える。なるべく具体的なプロセスに落として、それぞれで発散・収束させる。③大量処理：人間では処理できない膨大な量のインプット（大量のSNSデータやYouTube字幕データなど）から示唆・解釈を得る。加えて『構想の構造化・言語的補足』の有効性も高まっている。"},
+{unit:8,type:"desc",q:"「データ」と「インテリジェンス」の違いを、検索と生成AIの対比を用いて説明しなさい。",model:"データとは、いわゆる情報そのものを指す。一方インテリジェンスとは、人の意思決定を賢くするための『頭脳』としての機能であり、価値ある意思決定を支援する示唆（優先順位の設計など）を意味する。検索で得られるのはデータだけだが、生成AIはそのデータにインテリジェンス（示唆）を加える点に違いがある。戦略業務では、置かれている状況を正しく理解し、より正しい方向性を見極めるために、データを示唆へと昇華させることが重要となる。"},
+
+/* ===================== 第9単元 基幹業務DX（4択10・記述1） ===================== */
+{unit:9,type:"mc",q:"基幹業務DXが対象とする「管理部門（バックオフィス）」に含まれないものはどれか。",opts:["人事労務","経理","法務","営業"],answer:3,exp:"管理部門は人事労務・経理・法務・情報システムなど。営業はマーケティングDXの領域（プロフィットセンター）。"},
+{unit:9,type:"mc",q:"基幹業務DXの3つの効果に含まれないものはどれか。",opts:["無駄な作業削減","情報の一元管理","属人化の排除","顧客単価の向上"],answer:3,exp:"①無駄な作業削減②情報の一元管理③属人化の排除の3つ。顧客単価向上はマーケティング領域の話。"},
+{unit:9,type:"mc",q:"手続きのデジタル化により担当者依存から脱却し、証跡が残ることで内部統制・監査対応も強化される効果はどれか。",opts:["属人化の排除","無駄な作業削減","情報の一元管理","顧客理解の深化"],answer:0,exp:"属人化の排除。楽楽精算は承認履歴・修正履歴がログに残り監査対応・内部統制を強化する。"},
+{unit:9,type:"mc",q:"従来「コストセンター」と位置づけられていたが、現在は企業価値向上を目指す役割へ進化している部門はどれか。",opts:["人事部門","営業部門","マーケティング部門","研究開発部門"],answer:0,exp:"人事は利益を直接生まないコストセンターだったが、人的資本経営の浸透で企業価値向上を目指す役割へ。"},
+{unit:9,type:"mc",q:"「利益を直接生み出さないが、企業活動に必要な機能を担う部門」を何と呼ぶか。",opts:["コストセンター","プロフィットセンター","データセンター","コールセンター"],answer:0,exp:"コストセンター（人事・経理・法務など）。対してプロフィットセンターは営業・開発・マーケなど収益を直接生む部門。"},
+{unit:9,type:"mc",q:"「企業内の人材を資本と捉え、投資・育成を通じて企業価値向上を目指す」考え方を何と呼ぶか。",opts:["人的資本経営","終身雇用","年功序列","成果主義"],answer:0,exp:"人的資本経営。人的資本への投資・人材育成を起点にエンゲージメント向上・イノベーション・競争力強化・事業成長のサイクルを回す。"},
+{unit:9,type:"mc",q:"「誰に何をどのような手続きで割り当てるかというルールや制度を工学的に設計する経済学の一分野」はどれか。",opts:["マーケットデザイン","ゲーム理論のみ","行動経済学","計量経済学"],answer:0,exp:"マーケットデザイン。オリックス生命が人と組織の相性を定量化し営業配置を最適化した例がある。"},
+{unit:9,type:"mc",q:"経理DXに関連し、証憑の電子保存を義務化した法律はどれか。",opts:["電子帳簿保存法","インボイス制度","個人情報保護法","下請法"],answer:0,exp:"電子帳簿保存法の改正で証憑の電子保存が義務化され、紙中心からの脱却が加速した。"},
+{unit:9,type:"mc",q:"「適格請求書発行事業者に登録番号の記載を義務化し、売上と仕入データが税務上明確に紐づく」制度はどれか。",opts:["インボイス制度","電子帳簿保存法","マイナンバー制度","ふるさと納税"],answer:0,exp:"インボイス制度。適格請求書発行事業者は登録番号の記載が義務化される。"},
+{unit:9,type:"mc",q:"「契約書をAIが自動解析し、不利条項やリスク要素を検出する」法務DXのサービスはどれか。",opts:["AI契約審査（LegalForce）","電子契約（クラウドサイン）","会計ソフト（freee）","AI-OCR"],answer:0,exp:"AI契約審査（LegalForce）。契約書をAIが自動解析しリスク条項や抜け漏れを検出する。クラウドサインは電子契約サービス。"},
+{unit:9,type:"desc",q:"基幹業務DXの3つの効果を挙げ、それぞれ具体例とともに説明しなさい。",model:"①無駄な作業削減：勤怠管理・仕訳・契約書レビューなどの定型業務を自動化し、人的リソースや時間を削減する（例：GO BUSINESSがタクシー利用の配車・精算をクラウドで一元化）。②情報の一元管理：管理部門に散在していた情報を統合し、データの精度と即時性を高め、経営判断に使える戦略データとして活用する（例：jinjerが勤怠・労務・経費を一つのプラットフォームで統合）。③属人化の排除：手続きのデジタル化で担当者依存から脱却し、証跡が残ることで内部統制・監査対応も強化される（例：楽楽精算が承認ルートを自動化し履歴をログに残す）。これらにより単なる効率化にとどまらず企業経営の質そのものを底上げする。"},
+
+/* ===================== 第10単元 サプライチェーンDX（4択12・記述1） ===================== */
+{unit:10,type:"mc",q:"サプライチェーンとは何を表すか、最も適切なものはどれか。",opts:["調達→製造→物流→販売→消費に至る一連の流れ","顧客の認知から購入までの流れ","企業の組織構造","財務諸表の構成"],answer:0,exp:"サプライチェーン＝調達→製造→物流→販売→消費の一連の流れ。企業と企業の接点を表す。"},
+{unit:10,type:"mc",q:"サプライチェーンDXの目的として最も適切なものはどれか。",opts:["調達・生産・物流・販売の流れをリアルタイムに可視化・最適化し全体最適な経営判断を可能にすること","中間商流をすべてカットすること","製造コストのみを削減すること","販売価格を上げること"],answer:0,exp:"全体最適が目的。中間商流のカットだけが最適化とは限らず、選別・加工機能で大規模に効率化することで価格が最適化される。"},
+{unit:10,type:"mc",q:"サプライチェーンの「在庫」ステージのDX施策として最も適切なものはどれか。",opts:["AI需要予測による自動発注・補充","GPS・TMSによる輸送可視化","サプライヤー情報の電子化","IoTによる稼働状況把握"],answer:0,exp:"在庫＝AI需要予測による自動発注・補充で欠品・過剰在庫を削減。輸送＝GPS・TMS、調達＝電子化、生産＝IoT。"},
+{unit:10,type:"mc",q:"「輸配送の計画・手配・進捗管理を一元管理するシステム」を何と呼ぶか。",opts:["TMS（Transport Management System）","ERP","CRM","DMP"],answer:0,exp:"TMS（Transport Management System）。Hacobuの「MOVO」がバース管理などを提供。"},
+{unit:10,type:"mc",q:"「パーツの3D CADデータだけを管理し、必要な時にプリントする」考え方を何と呼ぶか。",opts:["デジタル在庫（3Dプリンター活用）","JIT","かんばん方式","ドロップシッピング"],answer:0,exp:"3Dプリンターとデジタル在庫。ストラタシスがオンデマンド生産で在庫削減・リードタイム短縮を実現。"},
+{unit:10,type:"mc",q:"センサーで工場設備の稼働・振動・温湿度を可視化し、異常検知・予知保全を行う取り組みはどれか。",opts:["生産管理のIoT化","AI需要予測","TMS","クラウドファンディング"],answer:0,exp:"生産管理のIoT化。NTT東日本の「置くだけIoT」が代表例。"},
+{unit:10,type:"mc",q:"G20／FSBが2015年に設立し、気候変動による財務リスク・機会の開示を推奨する国際タスクフォースはどれか。",opts:["TCFD","GDPR","ISO","GHG"],answer:0,exp:"TCFD（Task Force on Climate-related Financial Disclosures）。開示項目はガバナンス・戦略・リスク管理・指標と目標の4つ。"},
+{unit:10,type:"mc",q:"GHG（温室効果ガス）排出量のScope分類で、「他社から購入した電力・熱の使用に伴う間接排出」はどれに該当するか。",opts:["Scope 1","Scope 2","Scope 3","Scope 4"],answer:1,exp:"Scope 2＝購入電力・熱の使用に伴う間接排出。Scope 1＝直接排出、Scope 3＝サプライチェーン全体のその他間接排出。"},
+{unit:10,type:"mc",q:"GHGのScope分類で、「原材料調達・製品輸送・製品使用・廃棄などサプライチェーン全体のその他間接排出」はどれか。",opts:["Scope 3","Scope 1","Scope 2","Scope 0"],answer:0,exp:"Scope 3＝サプライチェーン全体のその他の間接排出（調達・輸送・使用・廃棄・出張など）。"},
+{unit:10,type:"mc",q:"「その製品がいつ・どこで・誰によって作られたかを、調達から廃棄まで追跡可能にすること」を何と呼ぶか。",opts:["トレーサビリティ","サステナビリティ","ダイバーシティ","スケーラビリティ"],answer:0,exp:"トレーサビリティ。水産物のMSC認証は欧米で一般化し、認証がないと大手小売に並びにくい。"},
+{unit:10,type:"mc",q:"「消費者の支持や予約購入を通じて事前に需要を把握し、在庫リスクを抑えた商品開発を可能にする手法」はどれか。",opts:["クラウドファンディング","サブスクリプション","リテールメディア","ライブコマース"],answer:0,exp:"クラウドファンディング。xToolのApparel Printerが約570万ドルを調達した例。"},
+{unit:10,type:"mc",q:"「短納期・小ロットを前提に設計から製造までを一気通貫で最適化する手法」を何と呼ぶか。",opts:["デジタルマニュファクチャリング","マスプロダクション","アウトソーシング","オフショアリング"],answer:0,exp:"デジタルマニュファクチャリング。Panasonicが金型製造を起点に設計〜製造をデジタル統合した例。"},
+{unit:10,type:"desc",q:"サプライチェーンDXにおいて、TCFDやGHG排出量開示の広がりが示す「経済性以外の視点」について説明しなさい。",model:"従来のサプライチェーンDXは経済的な最適化・効率化（コスト削減・リードタイム短縮など）が中心だったが、TCFD（気候関連財務情報開示）に基づく開示義務の拡大や、GHG排出量のScope1・2・3での開示が求められるようになった。これにより、サプライチェーン全体でのトレーサビリティ（その製品がいつ・どこで・誰によって作られたかを調達から廃棄まで追跡可能にすること）向上の視点が加わる。実際に水産物のMSC認証は欧米で一般化しており、認証が取れていないと大手小売店に並びにくい状況になっている。つまり、経済性だけでなく環境・持続可能性への対応がサプライチェーンDXに求められている。"},
+
+/* ===================== 第11単元 事例・関連用語（4択10・記述2） ===================== */
+{unit:11,type:"mc",q:"企業の「パーパス（Purpose）」の説明として最も適切なものはどれか。",opts:["Why：存在意義","Where：目指す姿","How：具体的手段","When：達成時期"],answer:0,exp:"パーパス＝Why（存在意義）。ビジョン＝Where（目指す姿）。"},
+{unit:11,type:"mc",q:"「ソフトを買うのではなく借りる仕組み」で、初期費用が安く更新が自動のものはどれか。",opts:["SaaS","オンプレミス","メインフレーム","ERP"],answer:0,exp:"SaaS（Software as a Service）。対してオンプレミスは会社内にサーバを置き、自由に管理できるが費用が高い。"},
+{unit:11,type:"mc",q:"「会社の中にサーバを置く方法で、自由に管理できるが費用が高い」ものを何と呼ぶか。",opts:["オンプレミス","SaaS","クラウド","PaaS"],answer:0,exp:"オンプレミス。SaaS・クラウドはインターネット上のサービスを利用する。"},
+{unit:11,type:"mc",q:"「販売・在庫・会計・人事など会社全体をまとめ、すべてつなげるシステム」はどれか。",opts:["ERP","CRM","SFA","MA"],answer:0,exp:"ERP（Enterprise Resource Planning）。受注すると在庫が減り売上が記録され請求書が作られる、と全部つながる。"},
+{unit:11,type:"mc",q:"ITベンダーの種類のうち「何を作るべきかを考える」役割を担うのはどれか。",opts:["コンサルティング会社","SIer","クラウド事業者","ソフトウェア会社"],answer:0,exp:"コンサル＝何を作るべきか考える、SIer＝システムを作る、ソフトウェア会社＝プログラム開発、クラウド事業者＝サービス提供。"},
+{unit:11,type:"mc",q:"「DX銘柄」を選定している主体の正しい組み合わせはどれか。",opts:["経済産業省と東京証券取引所","総務省と日本銀行","金融庁と財務省","文部科学省と経団連"],answer:0,exp:"DX銘柄は経済産業省と東京証券取引所が選定。デジタルで企業価値を高める先進企業を表彰する。"},
+{unit:11,type:"mc",q:"企業データが部署ごとにバラバラのシステムに眠り、孤立している状態を何と呼ぶか。",opts:["データのサイロ化（孤立化）","データレイク","データマート","データクレンジング"],answer:0,exp:"データのサイロ化（孤立化）。必要なデータを探すだけで一苦労になる。"},
+{unit:11,type:"mc",q:"データマネジメント基盤において「データを一箇所に集める」役割を担うものはどれか。",opts:["データレイク","データウェアハウス","データマート","データサイロ"],answer:0,exp:"データレイク（集める）→データウェアハウス（整理・加工）→データマート（分析に使えるように）の流れ。"},
+{unit:11,type:"mc",q:"データマネジメント基盤で「使いやすい形にきれいに整理・加工する」役割を担うものはどれか。",opts:["データウェアハウス","データレイク","データマート","データサイロ"],answer:0,exp:"データウェアハウス（整理・加工）。集めるのがデータレイク、分析に使えるようにするのがデータマート。"},
+{unit:11,type:"mc",q:"小売業の最新DXとして注目される、AIエージェントが購買を代行するコマースを何と呼ぶか。",opts:["Agentic Commerce","Social Commerce","Live Commerce","Quick Commerce"],answer:0,exp:"Agentic Commerce。CESやNRFなどの展示会で注目される最新トレンド。"},
+{unit:11,type:"desc",q:"「データのサイロ化」とは何か、また「データマネジメント基盤」の3つの構成要素（データレイク・データウェアハウス・データマート）を説明しなさい。",model:"データのサイロ化（孤立化）とは、企業のデータが営業・製造・マーケティング・財務など部署ごとにバラバラのシステム（Excelや独自ソフト）に眠り、必要なデータを探すだけで一苦労になる（散らかった物置のような）状態を指す。これを解決するのがデータマネジメント基盤で、①データレイク：データを一箇所に集める、②データウェアハウス：使いやすい形にきれいに整理・加工する、③データマート：誰もが安全かつスピーディに分析に使えるようにする、という一連の仕組みからなる。味の素はこのデータマネジメント基盤を整備したDX事例である。"},
+{unit:11,type:"desc",q:"「パーパス」と「ビジョン」の違いを説明し、それぞれの具体例を挙げなさい。",model:"パーパス（Purpose）は『Why：存在意義』を表し、その企業が何のために存在するのかを示す。ビジョン（Vision）は『Where：目指す姿』を表し、将来どのような状態を目指すのかを示す。例：ソニーグループのパーパスは『クリエイティビティとテクノロジーの力で、世界を感動で満たす』、味の素のパーパスは『アミノサイエンス®で、人・社会・地球のWell-beingに貢献する』。ビジョンの例としてトヨタ自動車は『モビリティカンパニーへ変革し、誰もが自由に移動できる社会を実現する』を掲げている。"}
+);
+
+
+/* ============ 単元名 ============ */
+const UNIT_NAMES = {
+  1:"DXの基礎概念",2:"マーケティングDXの全体像",3:"最新技術（12分類）",
+  4:"DXを阻む要因",5:"認知領域",6:"体験領域",7:"継続領域とフレームワーク",
+  8:"戦略領域・生成AI",9:"基幹業務DX",10:"サプライチェーンDX",11:"事例・関連用語"
+};
+
+/* ============ タブ切替 ============ */
+document.querySelectorAll('.tab-btn').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('.tab-btn').forEach(x=>x.classList.remove('active'));
+    document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active');
+    document.getElementById(b.dataset.view).classList.add('active');
+    window.scrollTo({top:0,behavior:'smooth'});
+  });
+});
+
+/* ============ 問題一覧描画 ============ */
+let curType="all", curUnit="all";
+function buildUnitFilter(){
+  const wrap=document.getElementById('unitFilter');
+  let html='<button class="active" data-unit="all">全単元</button>';
+  Object.keys(UNIT_NAMES).forEach(u=>{
+    html+=`<button data-unit="${u}">${u}. ${UNIT_NAMES[u]}</button>`;
+  });
+  wrap.innerHTML=html;
+  wrap.querySelectorAll('button').forEach(b=>b.addEventListener('click',()=>{
+    wrap.querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); curUnit=b.dataset.unit; renderQList();
+  }));
+}
+document.getElementById('typeFilter').querySelectorAll('button').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.getElementById('typeFilter').querySelectorAll('button').forEach(x=>x.classList.remove('active'));
+    b.classList.add('active'); curType=b.dataset.type; renderQList();
+  });
+});
+function renderQList(){
+  const body=document.getElementById('qlistBody');
+  let html='';
+  QUESTIONS.forEach((q,i)=>{
+    if(curType!=="all" && q.type!==curType) return;
+    if(curUnit!=="all" && String(q.unit)!==curUnit) return;
+    html+=`<div class="qitem"><div class="qhead"><span class="qnum">Q${i+1}</span>`;
+    html+=`<span class="qtag">${q.unit}. ${UNIT_NAMES[q.unit]}</span>`;
+    html+= q.type==="desc"?`<span class="qtag desc">記述</span>`:`<span class="qtag">4択</span>`;
+    html+=`</div><div class="qtext">${q.q}</div>`;
+    if(q.type==="mc"){
+      html+='<ul class="qopts">';
+      q.opts.forEach((o,oi)=>{ html+=`<li class="${oi===q.answer?'correct':''}">${'①②③④'[oi]} ${o}</li>`; });
+      html+='</ul>';
+      html+=`<div class="ans"><b>正解：${'①②③④'[q.answer]}</b>　${q.exp}</div>`;
+    }else{
+      html+=`<div class="model"><b>模範解答：</b>${q.model}</div>`;
+    }
+    html+='</div>';
+  });
+  body.innerHTML=html||'<p style="text-align:center;color:var(--sub)">該当する問題がありません。</p>';
+}
+
+/* ============ 演習ロジック ============ */
+let exSet=[], exAns=[], exIdx=0;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+
+function startExercise(){
+  exSet=shuffle(QUESTIONS).slice(0,30);
+  exAns=exSet.map(()=>({picked:null,text:""}));
+  exIdx=0;
+  document.getElementById('exStart').classList.add('hidden');
+  document.getElementById('exResult').classList.add('hidden');
+  document.getElementById('exRun').classList.remove('hidden');
+  renderExQ();
+}
+function renderExQ(){
+  const q=exSet[exIdx];
+  document.getElementById('exProgress').textContent=`第 ${exIdx+1} 問 / 全 30 問（${q.type==="desc"?"記述":"4択"}・${UNIT_NAMES[q.unit]}）`;
+  document.getElementById('exPbarFill').style.width=((exIdx+1)/30*100)+'%';
+  let html=`<div class="exq"><div class="qtext">${q.q}</div>`;
+  if(q.type==="mc"){
+    html+='<ul class="exopts">';
+    q.opts.forEach((o,oi)=>{
+      const sel=exAns[exIdx].picked===oi?'sel':'';
+      html+=`<li class="${sel}" data-oi="${oi}">${'①②③④'[oi]} ${o}</li>`;
+    });
+    html+='</ul>';
+  }else{
+    html+=`<textarea class="exwrite" id="exText" placeholder="ここに解答を記述してください">${exAns[exIdx].text}</textarea>`;
+  }
+  html+='</div>';
+  document.getElementById('exQArea').innerHTML=html;
+  if(q.type==="mc"){
+    document.querySelectorAll('.exopts li').forEach(li=>li.addEventListener('click',()=>{
+      exAns[exIdx].picked=parseInt(li.dataset.oi);
+      document.querySelectorAll('.exopts li').forEach(x=>x.classList.remove('sel'));
+      li.classList.add('sel');
+    }));
+  }else{
+    document.getElementById('exText').addEventListener('input',e=>{exAns[exIdx].text=e.target.value;});
+  }
+  document.getElementById('prevBtn').style.visibility=exIdx===0?'hidden':'visible';
+  document.getElementById('nextBtn').textContent=exIdx===29?'採点する ✓':'次へ →';
+}
+document.getElementById('prevBtn').addEventListener('click',()=>{if(exIdx>0){exIdx--;renderExQ();}});
+document.getElementById('nextBtn').addEventListener('click',()=>{
+  if(exIdx<29){exIdx++;renderExQ();}else{showResult();}
+});
+
+function showResult(){
+  document.getElementById('exRun').classList.add('hidden');
+  const res=document.getElementById('exResult');
+  res.classList.remove('hidden');
+  let correct=0, mcTotal=0, descTotal=0;
+  exSet.forEach((q,i)=>{
+    if(q.type==="mc"){mcTotal++; if(exAns[i].picked===q.answer)correct++;}
+    else{descTotal++;}
+  });
+  let html=`<div class="result-head"><div>採点結果</div>
+    <div class="score">${correct} / ${mcTotal}</div>
+    <div>4択問題の正答数（正答率 ${mcTotal?Math.round(correct/mcTotal*100):0}%）</div>
+    <div style="font-size:.82rem;margin-top:8px;opacity:.9">記述問題 ${descTotal}問は模範解答と照合して自己採点してください</div></div>`;
+  html+='<div style="text-align:center;margin:18px 0"><button class="btn" id="retryBtn">🔄 もう一度演習する（新しい30問）</button></div>';
+  exSet.forEach((q,i)=>{
+    if(q.type==="mc"){
+      const ok=exAns[i].picked===q.answer;
+      const picked=exAns[i].picked;
+      html+=`<div class="ritem ${ok?'ok':'ng'}"><div class="qhead"><span class="qnum">第${i+1}問</span>
+        <span class="qtag">${UNIT_NAMES[q.unit]}</span>
+        <span class="badge ${ok?'ok':'ng'}">${ok?'正解':'不正解'}</span></div>
+        <div class="qtext">${q.q}</div>
+        <div class="rmeta">`;
+      html+= picked===null?`<span class="you">あなたの解答：未選択</span><br>`
+        :`<span class="you">あなたの解答：${'①②③④'[picked]} ${q.opts[picked]}</span><br>`;
+      html+=`<span class="cor">正解：${'①②③④'[q.answer]} ${q.opts[q.answer]}</span></div>
+        <div class="ans">${q.exp}</div></div>`;
+    }else{
+      const answered=exAns[i].text.trim().length>0;
+      html+=`<div class="ritem skip"><div class="qhead"><span class="qnum">第${i+1}問</span>
+        <span class="qtag">${UNIT_NAMES[q.unit]}</span>
+        <span class="badge skip">記述（自己採点）</span></div>
+        <div class="qtext">${q.q}</div>
+        <div class="rmeta"><b>あなたの解答：</b><br>${answered?exAns[i].text.replace(/</g,'&lt;').replace(/\n/g,'<br>'):'（未記入）'}</div>
+        <div class="model"><b>模範解答：</b>${q.model}</div></div>`;
+    }
+  });
+  res.innerHTML=html;
+  document.getElementById('retryBtn').addEventListener('click',startExercise);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+document.getElementById('startBtn').addEventListener('click',startExercise);
+
+/* 初期化 */
+buildUnitFilter();
+renderQList();
+</script>
+</body>
+</html>
